@@ -346,3 +346,168 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tâm sự mỏng với Duy 💌</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fdf0f5;
+      padding: 20px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    h2 {
+      color: #ff4081;
+    }
+    input, textarea {
+      width: 90%;
+      max-width: 400px;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff85c1;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #fb6fbb;
+    }
+  </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+</head>
+<body>
+
+  <h2>Tâm sự mỏng với Duy 💬</h2>
+  <p>Hãy viết điều bạn muốn nói với Duy, chỉ hai người biết thôi nhaa~</p>
+
+  <input type="text" id="name" placeholder="Tên của bạn"><br>
+  <textarea id="message" rows="5" placeholder="Viết lời nhắn dễ thương ở đây..."></textarea><br>
+  <button onclick="sendMessage()">Gửi 💌</button>
+
+  <div id="status" style="margin-top: 20px; font-weight: bold;"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwKqqZxzHj8X2qyrQAnYcLKYbZ6PzF6XM",
+      authDomain: "tamsu-anhduy.firebaseapp.com",
+      databaseURL: "https://tamsu-anhduy-default-rtdb.firebaseio.com",
+      projectId: "tamsu-anhduy",
+      storageBucket: "tamsu-anhduy.appspot.com",
+      messagingSenderId: "956834928788",
+      appId: "1:956834928788:web:43c1ad2d2614c1f0e6f6a2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function sendMessage() {
+      const name = document.getElementById("name").value.trim();
+      const msg = document.getElementById("message").value.trim();
+      const status = document.getElementById("status");
+
+      if (!name || !msg) {
+        alert("Bạn chưa điền đầy đủ thông tin 😢");
+        return;
+      }
+
+      const newMsg = db.ref("messages").push();
+      newMsg.set({
+        name: name,
+        message: msg,
+        timestamp: new Date().toISOString()
+      });
+
+      status.innerHTML = "📬 Đã gửi tin nhắn đến Duy!";
+      document.getElementById("name").value = "";
+      document.getElementById("message").value = "";
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Duy đọc lời nhắn 💬</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8f9;
+      padding: 30px;
+      text-align: center;
+    }
+    h2 {
+      color: #e91e63;
+      margin-bottom: 20px;
+    }
+    .message {
+      background: #ffffff;
+      margin: 10px auto;
+      padding: 15px;
+      border-radius: 15px;
+      max-width: 500px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .name {
+      font-weight: bold;
+      color: #3f51b5;
+    }
+    .time {
+      font-size: 12px;
+      color: #888;
+      text-align: right;
+    }
+  </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+</head>
+<body>
+
+  <h2>Tin nhắn gửi đến Duy 💌</h2>
+  <div id="messages"></div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDwKqqZxzHj8X2qyrQAnYcLKYbZ6PzF6XM",
+      authDomain: "tamsu-anhduy.firebaseapp.com",
+      databaseURL: "https://tamsu-anhduy-default-rtdb.firebaseio.com",
+      projectId: "tamsu-anhduy",
+      storageBucket: "tamsu-anhduy.appspot.com",
+      messagingSenderId: "956834928788",
+      appId: "1:956834928788:web:43c1ad2d2614c1f0e6f6a2"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    db.ref("messages").on("value", (snapshot) => {
+      const data = snapshot.val();
+      const messagesDiv = document.getElementById("messages");
+      messagesDiv.innerHTML = "";
+      for (let id in data) {
+        const msg = data[id];
+        messagesDiv.innerHTML += `
+          <div class="message">
+            <div class="name">👤 ${msg.name}</div>
+            <div class="content">💬 ${msg.message}</div>
+            <div class="time">${new Date(msg.timestamp).toLocaleString()}</div>
+          </div>
+        `;
+      }
+    });
+  </script>
+</body>
+</html>
