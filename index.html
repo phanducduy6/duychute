@@ -188,3 +188,171 @@
   }
 </script>
 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Góc nhắn gửi đến Phan Đức Duy</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fceff9, #e0f7fa);
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+    h2 {
+      color: #ff66a3;
+    }
+    input, textarea {
+      padding: 8px;
+      width: 250px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #ff85c1;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #fb6fbb;
+    }
+    .section {
+      margin: 30px auto;
+      padding: 20px;
+      max-width: 500px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    iframe {
+      border-radius: 15px;
+    }
+    a.chat-link {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+    }
+    a.chat-link.zalo {
+      background: #0088cc;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: floatUp 5s linear infinite;
+      opacity: 0.7;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-600px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nhạc nền -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_403c6306d1.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    Trình duyệt của bạn không hỗ trợ audio :(
+  </audio>
+
+  <h2>Phan Đức Duy xin chào bạn dễ thương! 💌🐻</h2>
+  <p>Hãy gửi cho mình một lời nhắn thật ngọt ngào nha~</p>
+
+  <!-- Google Form -->
+  <div class="section">
+    <h3>📝 Gửi lời nhắn qua Google Form</h3>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfrlUgG0n7AaMhdgT2Ld9t8vMSuLOhqdp37xXG1usMXOSqVmQ/viewform?embedded=true" width="100%" height="500">Đang tải…</iframe>
+  </div>
+
+  <!-- Email Form (demo) -->
+  <div class="section">
+    <h3>📧 Gửi lời nhắn qua Email</h3>
+    <form id="emailForm">
+      <input type="text" name="name" placeholder="Tên hoặc Facebook của bạn" required><br>
+      <textarea name="message" placeholder="Viết lời nhắn tại đây..." required></textarea><br>
+      <button type="submit">Gửi cho Duy 💌</button>
+    </form>
+    <p><i>(Tính năng gửi email cần tích hợp EmailJS – phần này là demo thôi anh nhé!)</i></p>
+  </div>
+
+  <!-- Zalo & Facebook -->
+  <div class="section">
+    <h3>📱 Nhắn tin trực tiếp cho Duy</h3>
+    <a class="chat-link zalo" href="https://zalo.me/0399133576" target="_blank">Nhắn qua Zalo</a>
+    <a class="chat-link" href="https://www.facebook.com/phan.duc.duy.6" target="_blank">Nhắn qua Facebook</a>
+  </div>
+
+  <!-- Sổ lưu bút mini -->
+  <div class="section">
+    <h3>📖 Gửi lời nhắn tại đây</h3>
+    <input type="text" id="quickName" placeholder="Tên bạn"><br>
+    <textarea id="quickMsg" placeholder="Lời nhắn của bạn"></textarea><br>
+    <button onclick="submitQuickMessage()">Gửi 💖</button>
+    <div id="quickBoard" style="margin-top: 20px; color: #ff66a3; font-weight: bold;"></div>
+  </div>
+
+  <!-- Script hiệu ứng tim rơi & xử lý mini chat -->
+  <script>
+    function submitQuickMessage() {
+      const name = document.getElementById("quickName").value.trim();
+      const msg = document.getElementById("quickMsg").value.trim();
+      const board = document.getElementById("quickBoard");
+      if (!name || !msg) {
+        alert("Bạn chưa nhập tên hoặc lời nhắn kìa~ 😢");
+        return;
+      }
+      board.innerHTML = `📬 Có lời nhắn mới từ <b>${name}</b>:<br><i>"${msg}"</i>`;
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      heart.style.animationDuration = 4 + Math.random() * 2 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => document.body.removeChild(heart), 6000);
+    }
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
