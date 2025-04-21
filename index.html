@@ -3,36 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <title>Chào mừng bạn yêu!</title>
+
+  <!-- Thêm Font Awesome để dùng biểu tượng -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
       background: linear-gradient(to right, #ffe6f0, #e6f7ff);
       text-align: center;
       padding-top: 80px;
-      overflow-x: hidden;
+      overflow: hidden;
       color: #ff69b4;
     }
 
     .intro-text {
-      font-size: 2.4em;
+      font-size: 1.6em;
       margin-bottom: 30px;
       font-weight: bold;
-      text-shadow: 2px 2px 4px #fff;
-      padding: 0 20px;
+      text-shadow: 1px 1px 2px #fff;
+    }
+
+    .welcome-btn {
+      font-size: 1em;
+      padding: 10px 20px;
+      background: linear-gradient(to right, #ff99cc, #ffccff);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      z-index: 10;
+      position: relative;
+    }
+
+    .welcome-btn:hover {
+      background: linear-gradient(to right, #ff66b2, #ffb3e6);
+      transform: scale(1.05);
     }
 
     .social-links {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
+      display: none;
       margin-top: 40px;
-      pointer-events: none;
-    }
-
-    .social-links.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+      animation: fadeIn 1s ease forwards;
     }
 
     .social-links a {
@@ -47,18 +61,20 @@
       font-weight: bold;
     }
 
-    .social-links a img {
-      vertical-align: middle;
+    .social-links a i {
       margin-right: 8px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      object-fit: cover;
+      font-size: 1.2em;
+      vertical-align: middle;
     }
 
     .social-links a:hover {
       background-color: #ff4d88;
       transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .animal {
@@ -80,48 +96,21 @@
         opacity: 0;
       }
     }
-
-    @media (max-width: 600px) {
-      .intro-text {
-        font-size: 2.8em;
-      }
-
-      .social-links a {
-        font-size: 1.2em;
-        padding: 12px 24px;
-      }
-    }
   </style>
 </head>
 <body>
 
   <div class="intro-text">🌸 Xin chào bạn dễ thương! Đây là góc nhỏ xinh của mình nè~ 🌸</div>
 
+  <button class="welcome-btn" onclick="showSocialLinks()">🐾 Nhấn vào mình nha!</button>
+
   <div class="social-links" id="socialLinks">
-    <a href="https://www.facebook.com/phanducduy206" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook">
-      Facebook 1
-    </a>
-    <a href="https://www.facebook.com/phanducduy26" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook">
-      Facebook 2
-    </a>
-    <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Facebook_icon.svg" alt="Facebook">
-      Facebook 3
-    </a>
-    <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
-      Instagram
-    </a>
-    <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok">
-      TikTok
-    </a>
-    <a href="https://locket.camera/links/VH6cjVoTajabxvxa6" target="_blank">
-      <img src="https://play-lh.googleusercontent.com/38dD0ZnZCJGv5OYQzIemA-Fjw_AqP_z9NOp7lAzCFioQaRXkhv1RcZgBypAV1UeMQg" alt="Locket">
-      Locket
-    </a>
+    <a href="https://www.facebook.com/phanducduy206" target="_blank"><i class="fab fa-facebook"></i>Facebook 1</a>
+    <a href="https://www.facebook.com/phanducduy26" target="_blank"><i class="fab fa-facebook"></i>Facebook 2</a>
+    <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank"><i class="fab fa-facebook"></i>Facebook 3</a>
+    <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+    <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank"><i class="fab fa-tiktok"></i>TikTok</a>
+    <a href="https://locket.camera/links/VH6cjVoTajabxvxa6" target="_blank"><i class="fas fa-link"></i>Locket</a>
   </div>
 
   <!-- Các con vật chạy xung quanh -->
@@ -132,20 +121,11 @@
   <div class="animal" style="top: 70%; left: -70px; animation-delay: 8s;">🐻</div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    function showSocialLinks() {
       const links = document.getElementById("socialLinks");
-
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            links.classList.add("show");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      observer.observe(links);
-    });
+      links.style.display = "block";
+      document.querySelector(".welcome-btn").style.display = "none";
+    }
   </script>
 
 </body>
