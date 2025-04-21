@@ -200,3 +200,90 @@
     <a href="https://facebook.com/phan.duc.duy.6" class="cute-option" target="_blank">Facebook Hiu Hiu</a>
   </div>
 </div>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tải Ảnh Có Mật Khẩu</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #fddde6, #d9f1ff);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .cute-button {
+      background-color: #ff9ecf;
+      color: white;
+      font-size: 18px;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .cute-button:hover {
+      transform: scale(1.05);
+      background-color: #ff7fbf;
+    }
+
+    #upload-section, #password-section {
+      margin-top: 30px;
+      display: none;
+    }
+
+    input[type="file"], input[type="password"] {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>cuộc sống đời thường của Duy</h2>
+  <button class="cute-button" onclick="showPassword()">ở đây nè!</button>
+
+  <div id="password-section">
+    <p>Nhập mật khẩu để tiếp tục nhé:</p>
+    <input type="password" id="passwordInput" placeholder="Mật khẩu nè">
+    <br>
+    <button class="cute-button" onclick="checkPassword()">Xác nhận</button>
+    <p id="error-message" class="error"></p>
+  </div>
+
+  <div id="upload-section">
+    <p>Chọn một tấm ảnh dễ thương nha!</p>
+    <input type="file" accept="image/*">
+  </div>
+
+  <script>
+    function showPassword() {
+      document.getElementById("password-section").style.display = "block";
+    }
+
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const correctPassword = "Phanducduy6."; // Mật khẩu đã được cập nhật
+      const errorMsg = document.getElementById("error-message");
+
+      if (password === correctPassword) {
+        document.getElementById("upload-section").style.display = "block";
+        document.getElementById("password-section").style.display = "none";
+        errorMsg.textContent = "";
+      } else {
+        errorMsg.textContent = "Sai mật khẩu rồi nha!";
+      }
+    }
+  </script>
+</body>
+</html> 
