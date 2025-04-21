@@ -151,4 +151,40 @@
   </script>
 
 </body>
-</html>
+</html><!-- Phần người khác nhắn tin tới Duy -->
+<div style="text-align: center; margin-top: 30px;">
+  <p style="font-size: 16px;">💬 Gửi lời nhắn dễ thương đến Phan Đức Duy nè:</p>
+  <input
+    type="text"
+    id="userMsg"
+    placeholder="Viết lời nhắn tại đây..."
+    onkeydown="if(event.key==='Enter') sendToDuy()"
+    style="padding: 8px; width: 250px; border-radius: 10px; border: 1px solid #ccc;"
+  >
+  <br><br>
+  <button
+    onclick="sendToDuy()"
+    style="background-color: #ff85c1; color: white; padding: 8px 16px; border: none; border-radius: 20px; cursor: pointer;"
+  >
+    Gửi cho Duy 💌
+  </button>
+
+  <!-- Thông báo sau khi gửi -->
+  <div id="replyBack" style="margin-top: 15px; color: #ff66a3; font-weight: bold;"></div>
+</div>
+
+<!-- Script xử lý lời nhắn -->
+<script>
+  function sendToDuy() {
+    const msg = document.getElementById("userMsg").value.trim();
+    const replyDiv = document.getElementById("replyBack");
+
+    if (msg) {
+      replyDiv.innerHTML = `📨 Cảm ơn bạn! Duy đã nhận được lời nhắn:<br><br>💌 "<i>${msg}</i>"`;
+      document.getElementById("userMsg").value = "";
+    } else {
+      alert("Bạn chưa viết gì hết trơn á 😢");
+    }
+  }
+</script>
+
