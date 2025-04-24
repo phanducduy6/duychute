@@ -263,14 +263,37 @@
     <button class="cute-button" onclick="checkPassword()">Xác nhận</button>
     <p id="error-message" class="error"></p>
   </div>
+<div id="upload-section" style="display:none;">
+  <p>Chọn một tấm ảnh để thưởng nha!</p>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" accept="image/*" required>
+    <button type="submit">Tải ảnh lên</button>
+  </form>
+  <div id="result"></div>
+</div>
 
-  <div id="upload-section">
-    <p>Chọn một tấm ảnh dễ thương nha!</p>
-    <input type="file" accept="image/*">
   </div>
 
   <script>
     function showPassword() {
+</script>
+<script>
+  document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const file = document.getElementById('fileInput').files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const res = await fetch('https://image-upload-server-il2j.onrender.com/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    const text = await res.text();
+    document.getElementById('result').innerHTML = text;
+  });
+</script>
+
       document.getElementById("password-section").style.display = "block";
     }
 
