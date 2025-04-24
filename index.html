@@ -378,7 +378,8 @@
     <button class="cute-button" onclick="toggleDropdown()">🌸 hiệu ứng trái tim  🌸</button>
     
     <div class="dropdown" id="menu">
-      <button>🍓 mở ra </button>
+      <button onclick="openHeartEffect()">🍓 mở ra</button>
+
       <button>🍇 mở ra <button>
       <button>🍉 mở ra </button>
       <button>🍑 mở ra </button>
@@ -390,7 +391,10 @@
     function toggleDropdown() {
       const menu = document.getElementById('menu');
       menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    }
+    }function openHeartEffect() {
+  window.open("heart.html", "_blank");
+}
+
   </script>
 
 </body>
