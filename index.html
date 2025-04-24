@@ -306,3 +306,93 @@
     document.getElementById('result').innerHTML = text;
   });
 </script>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(to right, #ffe6f0, #e6f7ff);
+      font-family: 'Comic Sans MS', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .button-wrapper {
+      margin-top: 80px;
+      margin-bottom: 60px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cute-button {
+      background-color: #ff99cc;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .cute-button:hover {
+      background-color: #ff80bf;
+      transform: scale(1.05);
+    }
+
+    .dropdown {
+      display: none;
+      flex-direction: column;
+      margin-top: 15px;
+      gap: 10px;
+    }
+
+    .dropdown button {
+      background-color: #ffd6e8;
+      color: #333;
+      font-size: 14px;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown button:hover {
+      background-color: #ffb3d9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="button-wrapper">
+    <button class="cute-button" onclick="toggleDropdown()">🌸 hiệu ứng trái tim  🌸</button>
+    
+    <div class="dropdown" id="menu">
+      <button>🍓 mở ra </button>
+      <button>🍇 mở ra <button>
+      <button>🍉 mở ra </button>
+      <button>🍑 mở ra </button>
+      <button>🍒 mở ra </button>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+    }
+  </script>
+
+</body>
+</html>
+
