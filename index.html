@@ -272,8 +272,25 @@
   <div id="result"></div>
 </div>
 
-  </div>
 <script>
+  function showPassword() {
+    document.getElementById("password-section").style.display = "block";
+  }
+
+  function checkPassword() {
+    const password = document.getElementById("passwordInput").value;
+    const correctPassword = "Phanducduy6."; // mật khẩu đã được cập nhật
+    const errorMsg = document.getElementById("error-message");
+
+    if (password === correctPassword) {
+      document.getElementById("upload-section").style.display = "block";
+      document.getElementById("password-section").style.display = "none";
+      errorMsg.textContent = "";
+    } else {
+      errorMsg.textContent = "Sai mật khẩu rồi nhá!";
+    }
+  }
+
   document.getElementById('uploadForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const file = document.getElementById('fileInput').files[0];
@@ -289,22 +306,3 @@
     document.getElementById('result').innerHTML = text;
   });
 </script>
-
-      document.getElementById("password-section").style.display = "block";
-    }
-
-    function checkPassword() {
-      const password = document.getElementById("passwordInput").value;
-      const correctPassword = "Phanducduy6."; // Mật khẩu đã được cập nhật
-      const errorMsg = document.getElementById("error-message");
-
-      if (password === correctPassword) {
-        document.getElementById("upload-section").style.display = "block";
-        document.getElementById("password-section").style.display = "none";
-        errorMsg.textContent = "";
-      } else {
-        errorMsg.textContent = "Sai mật khẩu rồi nha!";
-      }
-    }
-  </script>
-<!--Start of Tawk.to Script-->
