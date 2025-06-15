@@ -251,23 +251,25 @@
   </style>
 </head>
 <body>
-  <h2>cuộc sống đời thường của Duy</h2>
-  <button class="cute-button" onclick="showPassword()">ở đây nè!</button>
+<h2>cuộc sống đời thường của Duy</h2>
+<button class="cute-button" onclick="showPassword()">ở đây nè!</button>
 
-  <div id="password-section">
-    <p>Nhập mật khẩu để tiếp tục nhé:</p>
-    <input type="password" id="passwordInput" placeholder="Mật khẩu nè">
-    <br>
-    <button class="cute-button" onclick="checkPassword()">Xác nhận</button>
-    <p id="error-message" class="error"></p>
-  </div>
-<div id="upload-section" style="display:none;">
-  <p>Chọn một tấm ảnh để thưởng nha!</p>
-  <form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" name="file" id="fileInput" accept="image/*" required>
-    <button type="submit">Tải ảnh lên</button>
-  </form>
-  <div id="result"></div>
+<!-- Nhập mật khẩu -->
+<div id="password-section" style="display: none;">
+  <p>Nhập mật khẩu để tiếp tục nhé:</p>
+  <input type="password" id="passwordInput" placeholder="Mật khẩu nè">
+  <br>
+  <button class="cute-button" onclick="checkPassword()">Xác nhận</button>
+  <p id="error-message" class="error" style="color: red;"></p>
+</div>
+
+<!-- Link bí mật -->
+<div id="secret-link" style="display: none; margin-top: 30px;">
+  <p>🎁 Đây là món quà nhỏ cho bạn nè:</p>
+  <a href="https://drive.google.com/your-secret-link" target="_blank"
+     style="display: inline-block; background-color: #ff66b3; color: white; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+    💖 Xem ảnh bí mật 💖
+  </a>
 </div>
 
 <script>
@@ -277,99 +279,18 @@
 
   function checkPassword() {
     const password = document.getElementById("passwordInput").value;
-    const correctPassword = "Phanducduy6."; // mật khẩu đã được cập nhật
+    const correctPassword = "Phanducduy6."; // Mật khẩu bạn đặt
     const errorMsg = document.getElementById("error-message");
 
     if (password === correctPassword) {
-      document.getElementById("upload-section").style.display = "block";
+      document.getElementById("secret-link").style.display = "block";
       document.getElementById("password-section").style.display = "none";
       errorMsg.textContent = "";
     } else {
       errorMsg.textContent = "Sai mật khẩu rồi nhá!";
     }
   }
-
-  document.getElementById('uploadForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const file = document.getElementById('fileInput').files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-
-    const res = await fetch('https://image-upload-server-il2j.onrender.com/upload', {
-      method: 'POST',
-      body: formData
-    });
-
-    const text = await res.text();
-    document.getElementById('result').innerHTML = text;
-  });
 </script>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background: linear-gradient(to right, #ffe6f0, #e6f7ff);
-      font-family: 'Comic Sans MS', cursive;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    .button-wrapper {
-      margin-top: 80px;
-      margin-bottom: 60px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .cute-button {
-      background-color: #ff99cc;
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 25px;
-      font-size: 16px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease;
-    }
-
-    .cute-button:hover {
-      background-color: #ff80bf;
-      transform: scale(1.05);
-    }
-
-    .dropdown {
-      display: none;
-      flex-direction: column;
-      margin-top: 15px;
-      gap: 10px;
-    }
-
-    .dropdown button {
-      background-color: #ffd6e8;
-      color: #333;
-      font-size: 14px;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-    }
-
-    .dropdown button:hover {
-      background-color: #ffb3d9;
-    }
-  </style>
-</head>
 <body>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
