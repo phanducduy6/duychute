@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa Bio Link - Phan Đức Duy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Mô phỏng màn hình điện thoại */
+        .phone-container {
+            width: 100%;
+            max-width: 400px;
+            background: linear-gradient(180deg, #8A84E2 0%, #6C63FF 100%); /* Màu tím giống ảnh */
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding-bottom: 80px; /* Chừa chỗ cho menu dưới */
+        }
+
+        /* Header profile */
+        .profile-section {
+            text-align: center;
+            padding: 40px 20px 20px;
+            color: white;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.3);
+            object-fit: cover;
+            margin-bottom: 10px;
+            background-color: #ddd; /* Placeholder ảnh */
+        }
+
+        .username {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .bio {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Khu vực danh sách link */
+        #link-list {
+            padding: 20px;
+            list-style: none;
+            margin: 0;
+        }
+
+        /* Style cho từng item link (Giống các thanh ngang trong ảnh) */
+        .link-item {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        /* Nút kéo thả (Bên trái) */
+        .handle {
+            cursor: grab;
+            color: #999;
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        /* Khu vực nhập liệu */
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-title {
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            font-size: 16px;
+            color: #333;
+            width: 100%;
+            outline: none;
+        }
+
+        .input-url {
+            border: none;
+            background: transparent;
+            font-size: 12px;
+            color: #666;
+            width: 100%;
+            outline: none;
+        }
+
+        /* Nút xóa */
+        .delete-btn {
+            color: #ff4757;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Nút Floating Action Button (+) */
+        .fab-add {
+            position: fixed;
+            bottom: 100px; /* Trên thanh menu một chút */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: #0099ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,153,255,0.4);
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        /* Menu dưới cùng (Giả lập) */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #eee;
+            z-index: 99;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .nav-item.active {
+            color: #0099ff;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    
+    <div class="profile-section">
+        <img src="https://via.placeholder.com/100" alt="Avatar" class="avatar">
+        <div class="username">Phan đức duy</div>
+        <div class="bio">Toàn Hàng đều</div>
+    </div>
+
+    <ul id="link-list">
+        </ul>
+
+    <button class="fab-add" onclick="addNewLink()">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <div class="bottom-nav">
+        <div class="nav-item">
+            <i class="fa-solid fa-layer-group"></i>
+            Pages
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-droplet"></i>
+            Style
+        </div>
+        <div class="nav-item active"> <div style="width: 20px;"></div> 
+        </div>
+        <div class="nav-item" onclick="saveData()">
+            <i class="fa-solid fa-eye"></i>
+            Preview
+        </div>
+        <div class="nav-item">
+            <i class="fa-solid fa-gear"></i>
+            Settings
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+<script>
+    // 1. Dữ liệu mẫu ban đầu (Giống ảnh của bạn)
+    let links = [
+        { title: "FB của duy", url: "https://facebook.com/..." },
+        { title: "Locket của duy", url: "https://locket.camera/..." },
+        { title: "locket 15s", url: "#" },
+        { title: "Chặn locket", url: "#" },
+        { title: "chặn tìm iphone", url: "#" },
+        { title: "Capcut Pro amazing", url: "#" }
+    ];
+
+    const listContainer = document.getElementById('link-list');
+
+    // 2. Hàm vẽ giao diện từ dữ liệu
+    function renderLinks() {
+        listContainer.innerHTML = ""; // Xóa cũ
+        links.forEach((link, index) => {
+            const li = document.createElement('li');
+            li.className = 'link-item';
+            li.innerHTML = `
+                <div class="handle"><i class="fa-solid fa-grip-lines"></i></div>
+                <div class="input-group">
+                    <input type="text" class="input-title" value="${link.title}" placeholder="Tên nút" oninput="updateLink(${index}, 'title', this.value)">
+                    <input type="text" class="input-url" value="${link.url}" placeholder="Dán link vào đây" oninput="updateLink(${index}, 'url', this.value)">
+                </div>
+                <button class="delete-btn" onclick="removeLink(${index})"><i class="fa-solid fa-trash"></i></button>
+            `;
+            listContainer.appendChild(li);
+        });
+    }
+
+    // 3. Hàm thêm nút mới
+    function addNewLink() {
+        links.push({ title: "Link mới", url: "" });
+        renderLinks();
+        // Cuộn xuống cuối
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // 4. Hàm xóa nút
+    function removeLink(index) {
+        if(confirm("Bạn có chắc muốn xóa nút này?")) {
+            links.splice(index, 1);
+            renderLinks();
+        }
+    }
+
+    // 5. Cập nhật dữ liệu khi gõ phím
+    function updateLink(index, field, value) {
+        links[index][field] = value;
+    }
+
+    // 6. Kích hoạt tính năng Kéo Thả (SortableJS)
+    new Sortable(listContainer, {
+        handle: '.handle', // Chỉ kéo được khi giữ vào icon handle
+        animation: 150,    // Hiệu ứng mượt
+        onEnd: function (evt) {
+            // Cập nhật lại mảng dữ liệu sau khi kéo thả
+            const item = links.splice(evt.oldIndex, 1)[0];
+            links.splice(evt.newIndex, 0, item);
+            console.log("Thứ tự mới:", links);
+        }
+    });
+
+    // 7. Hàm lưu / Xem trước (Giả lập)
+    function saveData() {
+        alert("Đã lưu dữ liệu! (Xem console để thấy mảng JSON)");
+        console.log(JSON.stringify(links, null, 2));
+        // Ở đây sau này bạn sẽ gửi dữ liệu này lên Server hoặc lưu vào LocalStorage
+    }
+
+    // Chạy lần đầu
+    renderLinks();
+
+</script>
+
+</body>
+</html>
