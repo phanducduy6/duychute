@@ -1,24 +1,321 @@
-<a href="https://drive.google.com/file/d/1FLqD161DHNEdyy3fDStVWLs-i_Xlffvj/view?usp=drivesdk" target="_blank" class="cute-btn">
-  🌸 Tải tại đây nè 🌸
-</a>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Phan Đức Duy - Locket Gold</title>
 
-<style>
-.cute-btn {
-  display: inline-block;
-  background: linear-gradient(135deg, #ff8ec7, #ffb6f0);
-  color: white;
-  font-size: 18px;
-  font-weight: bold;
-  border: none;
-  border-radius: 25px;
-  padding: 12px 30px;
-  text-decoration: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: all 0.2s ease;
-  margin-top: 10px;
-}
-.cute-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.25);
-}
-</style>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" type="image/png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* --- CẤU HÌNH GIAO DIỆN IOS DARK MODE --- */
+    :root {
+      --bg-color: #000000;
+      --card-bg: #1c1c1e;
+      --card-pressed: #2c2c2e;
+      --text-primary: #ffffff;
+      --text-secondary: #8e8e93;
+      --accent-gold: #ffd700; /* Màu vàng Locket Gold */
+      --accent-blue: #0a84ff;
+      --separator: #38383a;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    /* --- Header --- */
+    .profile-header {
+      text-align: center;
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffcc00, #ff9500); /* Gradient Gold */
+      margin: 0 auto 15px;
+      padding: 3px;
+    }
+    
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #000;
+    }
+
+    .name {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .bio {
+      color: var(--text-secondary);
+      font-size: 15px;
+    }
+
+    /* --- List Group (Giống Setting iPhone) --- */
+    .ios-list {
+      width: 100%;
+      max-width: 450px;
+      background-color: var(--card-bg);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .ios-item {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      color: var(--text-primary);
+      text-decoration: none;
+      background: var(--card-bg);
+      transition: background 0.2s;
+      border-bottom: 1px solid var(--separator);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .ios-item:last-child {
+      border-bottom: none;
+    }
+
+    .ios-item:active {
+      background-color: var(--card-pressed);
+    }
+
+    .ios-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      font-size: 16px;
+      color: white;
+    }
+
+    .ios-label {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .ios-arrow {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    /* --- Special Sections (Hidden by default) --- */
+    .hidden-section {
+      display: none;
+      width: 100%;
+      max-width: 450px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      animation: slideDown 0.3s ease;
+      border: 1px solid var(--accent-gold);
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      background: #000;
+      border: 1px solid var(--separator);
+      color: white;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="password"]:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .action-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn-gold {
+      background: linear-gradient(to right, #ffcc00, #ff9500);
+      color: black;
+    }
+
+    .btn-blue {
+      background: var(--accent-blue);
+      color: white;
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- Footer --- */
+    .footer {
+      margin-top: 20px;
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile-header">
+    <div class="avatar">
+      <img src="https://graph.facebook.com/100021946001556/picture?type=large" alt="Avatar">
+    </div>
+    <div class="name">Phan Đức Duy <i class="fas fa-check-circle" style="color: var(--accent-gold); font-size: 18px;"></i></div>
+    <div class="bio">Accounting Student • 2006</div>
+  </div>
+
+  <div class="ios-list">
+    <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank" class="ios-item">
+      <div class="ios-icon" style="background: #1877F2;"><i class="fab fa-facebook-f"></i></div>
+      <div class="ios-label">Facebook</div>
+      <i class="fas fa-chevron-right ios-arrow"></i>
+    </a>
+    
+    <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank" class="ios-item">
+      <div class="ios-icon" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);"><i class="fab fa-instagram"></i></div>
+      <div class="ios-label">Instagram</div>
+      <i class="fas fa-chevron-right ios-arrow"></i>
+    </a>
+
+    <a href="https://locket.camera/links/VH6cjVoTajabxvxa6" target="_blank" class="ios-item">
+      <div class="ios-icon" style="background: #ffcc00;"><i class="fas fa-heart" style="color: black;"></i></div>
+      <div class="ios-label">Locket Gold</div>
+      <i class="fas fa-chevron-right ios-arrow"></i>
+    </a>
+
+    <a href="https://zalo.me/0399133576" target="_blank" class="ios-item">
+      <div class="ios-icon" style="background: #0068ff;"><i class="fas fa-comment-dots"></i></div>
+      <div class="ios-label">Zalo Chat</div>
+      <i class="fas fa-chevron-right ios-arrow"></i>
+    </a>
+  </div>
+
+  <div class="ios-list">
+    <div class="ios-item" onclick="playNGL()">
+      <div class="ios-icon" style="background: linear-gradient(to right, #ff758c, #ff7eb3);"><i class="fas fa-envelope"></i></div>
+      <div class="ios-label">Gửi tin nhắn ẩn danh (NGL)</div>
+      <i class="fas fa-chevron-right ios-arrow"></i>
+    </div>
+
+    <div class="ios-item" onclick="toggleSection('upload-section')">
+      <div class="ios-icon" style="background: #34c759;"><i class="fas fa-cloud-upload-alt"></i></div>
+      <div class="ios-label">Gửi ảnh cho Duy</div>
+      <i class="fas fa-chevron-down ios-arrow"></i>
+    </div>
+  </div>
+
+  <div id="upload-section" class="hidden-section">
+    <h3 style="margin-bottom: 15px; text-align: center; color: var(--accent-gold);">Upload Ảnh</h3>
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfR7yFEqwennuJTv2CU6LxsA0zUIkUeZRwnPTCPXwu_R9aHvA/viewform?embedded=true" 
+            width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" style="background: white; border-radius: 8px;">
+      Đang tải...
+    </iframe>
+  </div>
+
+  <div class="ios-list">
+    <div class="ios-item" onclick="toggleSection('secret-section')">
+      <div class="ios-icon" style="background: #5e5ce6;"><i class="fas fa-lock"></i></div>
+      <div class="ios-label">Khu vực bí mật</div>
+      <i class="fas fa-key ios-arrow"></i>
+    </div>
+  </div>
+
+  <div id="secret-section" class="hidden-section">
+    <h3 style="margin-bottom: 10px; text-align: center;">Nhập mật khẩu</h3>
+    <input type="password" id="passwordInput" placeholder="Password...">
+    <div id="error-msg" style="color: #ff453a; font-size: 14px; margin-bottom: 10px; text-align: center;"></div>
+    <button class="action-btn btn-gold" onclick="checkPassword()">Mở Khóa</button>
+    
+    <div id="secret-link" style="display: none; margin-top: 20px; text-align: center;">
+      <p style="margin-bottom: 10px;">Thành công! 👇</p>
+      <a href="https://drive.google.com/drive/u/0/folders/YOUR_DRIVE_FOLDER_LINK" target="_blank" class="action-btn btn-blue" style="text-decoration: none; display: block;">
+        Xem Album Ngay
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://phanducduy.vercel.app" target="_blank" style="color: var(--text-secondary); text-decoration: none;">
+      Design by PhanDucDuy © 2024
+    </a>
+  </div>
+
+  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3"></audio>
+
+  <script>
+    // Hàm ẩn hiện các mục
+    function toggleSection(id) {
+      const el = document.getElementById(id);
+      if (el.style.display === "block") {
+        el.style.display = "none";
+      } else {
+        el.style.display = "block";
+      }
+    }
+
+    // Hàm NGL
+    function playNGL() {
+      const sound = document.getElementById("clickSound");
+      sound.volume = 0.5;
+      sound.play().catch(() => {}); 
+      setTimeout(() => {
+        window.open("https://ngl.link/phan.duc.duy.6", "_blank");
+      }, 200);
+    }
+
+    // Hàm Mật khẩu
+    function checkPassword() {
+      const pass = document.getElementById("passwordInput").value;
+      const error = document.getElementById("error-msg");
+      
+      if (pass === "Phanducduy6.") {
+        document.getElementById("secret-link").style.display = "block";
+        document.getElementById("passwordInput").style.display = "none";
+        document.querySelector("#secret-section button").style.display = "none";
+        error.innerText = "";
+      } else {
+        error.innerText = "Sai mật khẩu rồi! Thử lại đi.";
+      }
+    }
+  </script>
+
+</body>
+</html>
