@@ -267,25 +267,54 @@
   </script>
 
 </body>
-<a href="admin.html" style="
+<div onclick="checkAdmin()" class="btn-gear">
+  <i class="fa-solid fa-gear"></i>
+</div>
+
+<style>
+  .btn-gear {
     position: fixed;
     bottom: 20px;
     left: 20px;
     width: 50px;
     height: 50px;
-    background: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #ff85a2;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    color: #ff85a2;
+    font-size: 22px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
-    color: #333;
-    font-size: 24px;
-    text-decoration: none;
-    border: 2px solid #ff85a2;
-">
-    <i class="fa-solid fa-gear"></i>
-</a>
+    cursor: pointer; /* Biến con trỏ chuột thành hình bàn tay */
+    transition: transform 0.3s;
+  }
+
+  .btn-gear:hover {
+    transform: rotate(90deg) scale(1.1);
+    background-color: white;
+  }
+</style>
+
+<script>
+    function checkAdmin() {
+        // 1. Hiện hộp thoại hỏi mật khẩu
+        let pass = prompt("🔒 Nhập mật khẩu quản trị viên:");
+        
+        // 2. Kiểm tra mật khẩu (Bạn sửa mật khẩu ở dòng dưới nhé)
+        if (pass === "Phanducduy6.") { 
+            // Nếu đúng -> Chuyển sang trang Admin
+            window.location.href = "admin.html";
+        } else if (pass === null) {
+            // Nếu bấm Hủy -> Không làm gì cả
+        } else {
+            // Nếu sai -> Báo lỗi
+            alert("❌ Sai mật khẩu rồi! Bạn không phải là Duy.");
+        }
+    }
+</script>
+
 
 </html>
