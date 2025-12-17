@@ -3,378 +3,341 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chào mừng bạn yêu!</title>
+  <title>Chào mừng đến với góc của Duy</title>
 
-  <!-- Icon trái tim cho tab trình duyệt -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" type="image/png">
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 
   <style>
+    /* --- Cài đặt chung --- */
+    :root {
+      --primary-color: #ff85a2;
+      --secondary-color: #ffb6c1;
+      --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #e6f7ff 100%);
+      --text-color: #d63384;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to right, #ffe6f0, #e6f7ff);
-      text-align: center;
-      padding: 40px 10px;
-      overflow: auto;
-      color: #ff69b4;
-      font-size: 18px;
-    }
-
-    .intro-text {
-      font-size: 2em;
-      margin-bottom: 30px;
-      font-weight: bold;
-      text-shadow: 1px 1px 2px #fff;
-    }
-
-    .welcome-btn {
-      font-size: 1.2em;
-      padding: 14px 28px;
-      background: linear-gradient(to right, #ff99cc, #ffccff);
-      color: white;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      transition: all 0.3s ease;
-      z-index: 10;
+      font-family: 'Quicksand', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
       position: relative;
     }
 
-    .welcome-btn:hover {
-      background: linear-gradient(to right, #ff66b2, #ffb3e6);
-      transform: scale(1.05);
+    h1, h2, h3 {
+      font-family: 'Patrick Hand', cursive;
+      margin-bottom: 15px;
     }
 
-    .social-links {
-      display: none;
-      margin-top: 40px;
-      animation: fadeIn 1s ease forwards;
+    /* --- Container chính --- */
+    .container {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(255, 133, 162, 0.2);
+      width: 100%;
+      max-width: 500px;
+      z-index: 10;
+      text-align: center;
+      border: 2px solid #fff;
     }
 
-    .social-links a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 24px;
-      text-decoration: none;
-      color: white;
-      background-color: #ff85a2;
-      border-radius: 20px;
-      transition: background-color 0.3s, transform 0.3s;
+    /* --- Avatar & Intro --- */
+    .intro-text {
+      font-size: 1.8em;
       font-weight: bold;
+      margin-bottom: 25px;
+      text-shadow: 2px 2px 0px #fff;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 10px 5px;
+      border: none;
+      border-radius: 50px;
       font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-decoration: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
     }
 
-    .social-links a i {
-      margin-right: 8px;
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Style riêng cho từng loại nút */
+    .btn-main {
+      background: linear-gradient(to right, #ff99cc, #ffccff);
+      color: var(--white);
+    }
+
+    .btn-social {
+      background-color: var(--primary-color);
+      color: var(--white);
+      width: 100%;
+      max-width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px auto;
+    }
+
+    .btn-social i {
+      margin-right: 10px;
       font-size: 1.2em;
-      vertical-align: middle;
     }
 
-    .social-links a:hover {
-      background-color: #ff4d88;
-      transform: scale(1.1);
+    .btn-contact {
+      background-color: #fff;
+      color: var(--primary-color);
+      border: 2px solid var(--secondary-color);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .btn-contact:hover {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    /* --- Social Links Section --- */
+    .social-links {
+      display: none; /* Mặc định ẩn */
+      margin-top: 20px;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    /* --- Secret Section --- */
+    .secret-section {
+      margin-top: 30px;
+      border-top: 2px dashed #ffb6c1;
+      padding-top: 20px;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      border-radius: 20px;
+      border: 2px solid #ffb6c1;
+      outline: none;
+      font-family: 'Quicksand', sans-serif;
+      text-align: center;
+      width: 80%;
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    input[type="password"]:focus {
+      border-color: #ff85a2;
+      box-shadow: 0 0 8px rgba(255, 133, 162, 0.4);
+    }
+
+    .error-msg {
+      color: #ff4d4d;
+      font-size: 0.9em;
+      margin-top: 5px;
+      min-height: 20px;
+    }
+
+    /* --- Floating Animals Background --- */
+    .animal-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* Để không che nút bấm */
+      z-index: 0;
+      overflow: hidden;
     }
 
     .animal {
       position: absolute;
-      font-size: 24px;
-      animation: float 10s infinite linear;
+      font-size: 30px;
+      animation: floatAnimal 15s infinite linear;
+      opacity: 0.7;
     }
 
-    @keyframes float {
-      0% {
-        transform: translateX(-100px) translateY(0);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateX(110vw) translateY(-30px);
-        opacity: 0;
-      }
+    @keyframes floatAnimal {
+      0% { transform: translateX(-50px) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(100vw) rotate(360deg); opacity: 0; }
     }
 
-    @media (max-width: 480px) {
-      .intro-text {
-        font-size: 1.5em;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      .welcome-btn {
-        font-size: 1em;
-        padding: 12px 20px;
-      }
-
-      .social-links a {
-        font-size: 1em;
-        padding: 10px 18px;
-      }
+    /* --- Footer Links --- */
+    .footer-links {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="intro-text">🌸 Phan Đức Duy Xin chào bạn dễ thương! Đây là góc nhỏ xinh của mình nè~ 🌸</div>
-
-  <button class="welcome-btn" onclick="showSocialLinks()">🐾 Nhấn vào đây 🌸 </button>
-
-  <div class="social-links" id="socialLinks">
-    <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank"><i class="fab fa-facebook"></i> Facebook  </a>
-    <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
-    <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank"><i class="fab fa-tiktok"></i>TikTok</a>
-    <a href="https://locket.camera/links/VH6cjVoTajabxvxa6" target="_blank"><i class="fas fa-link"></i>Locket</a>
-
+  <div class="animal-container">
+    <div class="animal" style="top: 15%; animation-delay: 0s;">🐱</div>
+    <div class="animal" style="top: 35%; animation-delay: 3s;">🐶</div>
+    <div class="animal" style="top: 55%; animation-delay: 6s;">🦊</div>
+    <div class="animal" style="top: 75%; animation-delay: 9s;">🐰</div>
+    <div class="animal" style="top: 25%; animation-delay: 12s;">🐻</div>
   </div>
 
-  <!-- Các con vật chạy xung quanh -->
-  <div class="animal" style="top: 20%; left: -50px;">🐱</div>
-  <div class="animal" style="top: 40%; left: -100px; animation-delay: 2s;">🐶</div>
-  <div class="animal" style="top: 60%; left: -80px; animation-delay: 4s;">🦊</div>
-  <div class="animal" style="top: 30%; left: -60px; animation-delay: 6s;">🐰</div>
-  <div class="animal" style="top: 70%; left: -70px; animation-delay: 8s;">🐻</div>
+  <div class="container">
+    <div class="intro-text">
+      🌸 Phan Đức Duy 🌸<br>
+      <span style="font-size: 0.6em; font-weight: normal; font-family: 'Patrick Hand';">Chào bạn dễ thương! Đây là góc nhỏ của mình nè~</span>
+    </div>
+
+    <button class="btn btn-main" id="openSocialBtn" onclick="toggleSocials()">
+      🐾 Nhấn vào đây xem in4 🌸
+    </button>
+
+    <div class="social-links" id="socialLinks">
+      <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank" class="btn btn-social">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+      <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank" class="btn btn-social" style="background: #E1306C;">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank" class="btn btn-social" style="background: #000;">
+        <i class="fab fa-tiktok"></i> TikTok
+      </a>
+      <a href="https://locket.camera/links/VH6cjVoTajabxvxa6" target="_blank" class="btn btn-social" style="background: #fea02f;">
+        <i class="fas fa-link"></i> Locket
+      </a>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <h3>Nhắn lời yêu thương cho Duy nè~</h3>
+      <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <a href="https://zalo.me/0399133576" target="_blank" class="btn btn-contact">Zalo</a>
+        <a href="https://m.me/phan.duc.duy.6" target="_blank" class="btn btn-contact">Messenger</a>
+      </div>
+    </div>
+
+    <div class="footer-links">
+        <button class="btn btn-main" onclick="playNGL()" style="background: linear-gradient(to right, #ff758c, #ff7eb3);">
+            💌 Nhắn ẩn danh (NGL)
+        </button>
+        <a href="https://phanducduy.vercel.app" target="_blank" class="btn btn-contact" style="border-radius: 30px; font-size: 0.9em;">
+            🌸 Web chữ bay
+        </a>
+    </div>
+
+    <div class="secret-section">
+      <h3>🔐 Cuộc sống đời thường</h3>
+      <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()">Mở khóa xem ảnh</button>
+      
+      <div id="password-area" style="display: none; margin-top: 15px;">
+        <p>Nhập mật khẩu thần thánh:</p>
+        <input type="password" id="passwordInput" placeholder="Pass là gì ta?">
+        <div class="error-msg" id="error-message"></div>
+        <button class="btn btn-main" onclick="checkPassword()" style="margin-top: 10px; padding: 8px 20px;">Xác nhận</button>
+      </div>
+
+      <div id="secret-link" style="display: none; margin-top: 20px;">
+        <p>🎁 Quà cho bạn nè:</p>
+        <a href="https://drive.google.com/your-secret-link" target="_blank" class="btn btn-main">
+            💖 Xem Album Bí Mật 💖
+        </a>
+      </div>
+    </div>
+
+  </div> <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3" preload="auto"></audio>
 
   <script>
-    function showSocialLinks() {
+    // 1. Hàm hiện danh sách social
+    function toggleSocials() {
       const links = document.getElementById("socialLinks");
-      links.style.display = "block";
-      document.querySelector(".welcome-btn").style.display = "none";
-    }
-  </script>
-<!-- Link Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
-
-<style>
-  .cute-box {
-    text-align: center;
-    font-family: 'Quicksand', sans-serif;
-    color: #ff69b4;
-    margin-top: 30px;
-  }
-
-  .cute-title {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #ff66cc;
-  }
-
-  .cute-options {
-    display: inline-flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .cute-option {
-    background-color: #ffe6f0;
-    padding: 12px 20px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: 600;
-    color: #d63384;
-    border: 2px solid #ffb6c1;
-    box-shadow: 0 0 10px #ffc0cb80;
-    transition: 0.3s;
-  }
-
-  .cute-option:hover {
-    background-color: #ffd9ec;
-    color: #c2185b;
-    box-shadow: 0 0 15px #ff99cc;
-    transform: scale(1.05);
-  }
-</style>
-
-<div class="cute-box">
-  <div class="cute-title"> hãy nhắn cho Duy những lời yêu thương nhé nhé~</div>
-  <div class="cute-options">
-  <a href="https://zalo.me/0399133576" class="cute-option" target="_blank">Zalo </a>
-  <a href="https://m.me/phan.duc.duy.6" class="cute-option" target="_blank">Messenger </a>
-</div>
-
-</div>
-<!DOCTYPE html>
-<html lang="vi">
-
-<head>
-  <meta charset="UTF-8">
-  <title>Tải Ảnh Có Mật Khẩu</title>
-  <style>
-    body {
-      background: linear-gradient(to right, #fddde6, #d9f1ff);
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
-      padding-top: 100px;
+      const btn = document.getElementById("openSocialBtn");
+      
+      if (links.style.display === "block") {
+        links.style.display = "none";
+        btn.innerHTML = "🐾 Nhấn vào đây xem in4 🌸";
+      } else {
+        links.style.display = "block";
+        btn.style.display = "none"; // Ẩn nút sau khi bấm (hoặc xóa dòng này nếu muốn nút vẫn hiện)
+      }
     }
 
-    .cute-button {
-      background-color: #ff9ecf;
-      color: white;
-      font-size: 18px;
-      padding: 15px 30px;
-      border: none;
-      border-radius: 30px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-
-    .cute-button:hover {
-      transform: scale(1.05);
-      background-color: #ff7fbf;
-    }
-
-    #upload-section, #password-section {
-      margin-top: 30px;
-      display: none;
-    }
-
-    input[type="file"], input[type="password"] {
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-    }
-
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-<h2>cuộc sống đời thường của Duy</h2>
-<button class="cute-button" onclick="showPassword()">ở đây nè!</button>
-
-<!-- Nhập mật khẩu -->
-<div id="password-section" style="display: none;">
-  <p>Nhập mật khẩu để tiếp tục nhé:</p>
-  <input type="password" id="passwordInput" placeholder="Mật khẩu nè">
-  <br>
-  <button class="cute-button" onclick="checkPassword()">Xác nhận</button>
-  <p id="error-message" class="error" style="color: red;"></p>
-</div>
-
-<!-- Link bí mật -->
-<div id="secret-link" style="display: none; margin-top: 30px;">
-  <p>🎁 Đây là món quà nhỏ cho bạn nè:</p>
-  <a href="https://drive.google.com/your-secret-link" target="_blank"
-     style="display: inline-block; background-color: #ff66b3; color: white; padding: 12px 24px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 16px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-    💖 Xem ảnh bí mật 💖
-  </a>
-</div>
-
-<script>
-  function showPassword() {
-    document.getElementById("password-section").style.display = "block";
-  }
-
-  function checkPassword() {
-    const password = document.getElementById("passwordInput").value;
-    const correctPassword = "Phanducduy6."; // Mật khẩu bạn đặt
-    const errorMsg = document.getElementById("error-message");
-
-    if (password === correctPassword) {
-      document.getElementById("secret-link").style.display = "block";
-      document.getElementById("password-section").style.display = "none";
-      errorMsg.textContent = "";
-    } else {
-      errorMsg.textContent = "Sai mật khẩu rồi nhá!";
-    }
-  }
-</script>
-<body>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6807666914ae49190fc1b2dd/1ipeeg3eh';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Nút ấn dễ thương</title>
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: linear-gradient(to right, #ffe6f0, #e6f7ff);
-      text-align: center;
-      font-family: 'Patrick Hand', cursive;
-      padding-top: 100px;
-    }
-
-    h1 {
-      color: #ff3399;
-      font-size: 30px;
-      font-weight: bold;
-      margin-bottom: 30px;
-    }
-
-    .btn {
-      background-color: #ff80bf;
-      color: white;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 30px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      position: relative;
-    }
-
-    .btn:hover {
-      background-color: #ff66b3;
-      transform: scale(1.05);
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-  </style>
-</head>
-<body>
-
-  <h1>💌 bạn muốn nhắn nhủ gì ẩn danh thì nhấn vào đây nè 💕</h1>
-  <button class="btn" onclick="playSoundAndGo()">nhắn ẩn danh! ❤️</button>
-
-  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3" preload="auto"></audio>
-
-  <script>
-    function playSoundAndGo() {
+    // 2. Hàm xử lý NGL + Âm thanh
+    function playNGL() {
       const sound = document.getElementById("clickSound");
-      sound.play();
+      sound.volume = 0.5;
+      sound.play().catch(e => console.log("Audio play failed")); 
       setTimeout(() => {
         window.open("https://ngl.link/phan.duc.duy.6", "_blank");
-      }, 300); // chờ âm thanh vang lên một chút
+      }, 300);
+    }
+
+    // 3. Hàm xử lý mật khẩu
+    function showSecretInput() {
+      document.getElementById("toggleSecretBtn").style.display = "none";
+      document.getElementById("password-area").style.display = "block";
+    }
+
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const correctPassword = "Phanducduy6."; // Pass của bạn
+      const errorMsg = document.getElementById("error-message");
+
+      if (password === correctPassword) {
+        document.getElementById("secret-link").style.display = "block";
+        document.getElementById("password-area").style.display = "none";
+        errorMsg.textContent = "";
+      } else {
+        errorMsg.textContent = "Sai mật khẩu rồi nha! 😝";
+        // Hiệu ứng rung nhẹ input (tùy chọn)
+        const input = document.getElementById("passwordInput");
+        input.style.borderColor = "red";
+        setTimeout(() => input.style.borderColor = "#ffb6c1", 500);
+      }
     }
   </script>
-<!-- Nút mới thêm -->
-<div style="text-align: center; margin-top: 20px;">
-  <a href="https://phanducduy.vercel.app" target="_blank" 
-     style="display: inline-block; background: linear-gradient(to right, #fcb7e2, #fddde6); 
-            color: #fff; padding: 12px 24px; border-radius: 30px; 
-            font-weight: bold; text-decoration: none; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 16px;">
-    🌸 Chữ bay nổi 🌸
-  </a>
-</div>
-<!DOCTYPE html>
+
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6807666914ae49190fc1b2dd/1ipeeg3eh';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+
+</body>
+</html>
