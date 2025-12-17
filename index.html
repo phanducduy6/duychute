@@ -20,11 +20,7 @@
       --white: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Quicksand', sans-serif;
@@ -39,10 +35,7 @@
       position: relative;
     }
 
-    h1, h2, h3 {
-      font-family: 'Patrick Hand', cursive;
-      margin-bottom: 15px;
-    }
+    h1, h2, h3 { font-family: 'Patrick Hand', cursive; margin-bottom: 15px; }
 
     /* --- Container chính --- */
     .container {
@@ -68,140 +61,62 @@
 
     /* --- Buttons --- */
     .btn {
-      display: inline-block;
-      padding: 12px 25px;
-      margin: 10px 5px;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1em;
-      font-weight: bold;
-      cursor: pointer;
+      display: inline-block; padding: 12px 25px; margin: 10px 5px;
+      border: none; border-radius: 50px; font-size: 1.1em;
+      font-weight: bold; cursor: pointer; text-decoration: none;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      text-decoration: none;
       box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+    .btn:active { transform: scale(0.95); }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-
-    .btn:active {
-      transform: scale(0.95);
-    }
-
-    /* Style riêng cho từng loại nút */
-    .btn-main {
-      background: linear-gradient(to right, #ff99cc, #ffccff);
-      color: var(--white);
-    }
-
+    .btn-main { background: linear-gradient(to right, #ff99cc, #ffccff); color: var(--white); }
+    
     .btn-social {
-      background-color: var(--primary-color);
-      color: var(--white);
-      width: 100%;
-      max-width: 200px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 10px auto;
+      background-color: var(--primary-color); color: var(--white);
+      width: 100%; max-width: 200px; display: flex;
+      align-items: center; justify-content: center; margin: 10px auto;
+    }
+    .btn-social i { margin-right: 10px; font-size: 1.2em; }
+
+    .btn-contact { background-color: #fff; color: var(--primary-color); border: 2px solid var(--secondary-color); }
+    .btn-contact:hover { background-color: var(--secondary-color); color: white; }
+
+    /* --- Các Section ẩn/hiện --- */
+    .social-links, .upload-section, .password-area, .secret-link {
+      display: none; margin-top: 20px; animation: fadeIn 0.8s ease forwards;
     }
 
-    .btn-social i {
-      margin-right: 10px;
-      font-size: 1.2em;
-    }
-
-    .btn-contact {
-      background-color: #fff;
-      color: var(--primary-color);
-      border: 2px solid var(--secondary-color);
-    }
-
-    .btn-contact:hover {
-      background-color: var(--secondary-color);
-      color: white;
-    }
-
-    /* --- Social Links Section --- */
-    .social-links {
-      display: none; /* Mặc định ẩn */
-      margin-top: 20px;
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    /* --- Secret Section --- */
-    .secret-section {
-      margin-top: 30px;
-      border-top: 2px dashed #ffb6c1;
-      padding-top: 20px;
+    /* --- Divider --- */
+    .section-divider {
+      margin-top: 30px; border-top: 2px dashed #ffb6c1; padding-top: 20px;
     }
 
     input[type="password"] {
-      padding: 12px;
-      border-radius: 20px;
-      border: 2px solid #ffb6c1;
-      outline: none;
-      font-family: 'Quicksand', sans-serif;
-      text-align: center;
-      width: 80%;
-      margin-top: 10px;
-      background: rgba(255, 255, 255, 0.8);
+      padding: 12px; border-radius: 20px; border: 2px solid #ffb6c1;
+      outline: none; font-family: 'Quicksand', sans-serif; text-align: center;
+      width: 80%; margin-top: 10px; background: rgba(255, 255, 255, 0.8);
     }
+    input[type="password"]:focus { border-color: #ff85a2; box-shadow: 0 0 8px rgba(255, 133, 162, 0.4); }
 
-    input[type="password"]:focus {
-      border-color: #ff85a2;
-      box-shadow: 0 0 8px rgba(255, 133, 162, 0.4);
-    }
+    .error-msg { color: #ff4d4d; font-size: 0.9em; margin-top: 5px; min-height: 20px; }
 
-    .error-msg {
-      color: #ff4d4d;
-      font-size: 0.9em;
-      margin-top: 5px;
-      min-height: 20px;
-    }
-
-    /* --- Floating Animals Background --- */
+    /* --- Background Animals --- */
     .animal-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none; /* Để không che nút bấm */
-      z-index: 0;
-      overflow: hidden;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
     }
-
     .animal {
-      position: absolute;
-      font-size: 30px;
-      animation: floatAnimal 15s infinite linear;
-      opacity: 0.7;
+      position: absolute; font-size: 30px; animation: floatAnimal 15s infinite linear; opacity: 0.7;
     }
-
     @keyframes floatAnimal {
       0% { transform: translateX(-50px) rotate(0deg); opacity: 0; }
-      10% { opacity: 1; }
-      90% { opacity: 1; }
       100% { transform: translateX(100vw) rotate(360deg); opacity: 0; }
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- Footer Links --- */
-    .footer-links {
-      margin-top: 30px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-    }
+    .footer-links { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 15px; }
   </style>
 </head>
 <body>
@@ -247,27 +162,44 @@
       </div>
     </div>
 
-    <div class="footer-links">
+    <div style="margin-top: 30px;">
         <button class="btn btn-main" onclick="playNGL()" style="background: linear-gradient(to right, #ff758c, #ff7eb3);">
             💌 Nhắn ẩn danh (NGL)
         </button>
+        <br>
         <a href="https://phanducduy.vercel.app" target="_blank" class="btn btn-contact" style="border-radius: 30px; font-size: 0.9em;">
             🌸 Web chữ bay
         </a>
     </div>
 
-    <div class="secret-section">
+    <div class="section-divider">
+      <h3>📸 Góc Ảnh Của Duy</h3>
+      <p style="font-size: 0.8em; margin-bottom: 10px;">(Gửi ảnh cho mình, ảnh sẽ tự động lưu lại nhé)</p>
+
+      <button class="btn btn-main" onclick="toggleUpload()" style="background: linear-gradient(to right, #4facfe, #00f2fe);">
+        📤 Tải ảnh lên ngay
+      </button>
+
+      <div id="uploadArea" class="upload-section">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfR7yFEqwennuJTv2CU6LxsA0zUIkUeZRwnPTCPXwu_R9aHvA/viewform?embedded=true" 
+                width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">
+          Đang tải...
+        </iframe>
+      </div>
+    </div>
+
+    <div class="section-divider">
       <h3>🔐 Cuộc sống đời thường</h3>
-      <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()">Mở khóa xem ảnh</button>
+      <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()">Mở khóa xem Album</button>
       
-      <div id="password-area" style="display: none; margin-top: 15px;">
+      <div id="passwordArea" class="password-area">
         <p>Nhập mật khẩu thần thánh:</p>
         <input type="password" id="passwordInput" placeholder="Pass là gì ta?">
         <div class="error-msg" id="error-message"></div>
         <button class="btn btn-main" onclick="checkPassword()" style="margin-top: 10px; padding: 8px 20px;">Xác nhận</button>
       </div>
 
-      <div id="secret-link" style="display: none; margin-top: 20px;">
+      <div id="secretLink" class="secret-link">
         <p>🎁 Quà cho bạn nè:</p>
         <a href="https://drive.google.com/your-secret-link" target="_blank" class="btn btn-main">
             💖 Xem Album Bí Mật 💖
@@ -275,24 +207,67 @@
       </div>
     </div>
 
-  </div> <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3" preload="auto"></audio>
+    <div class="footer-links">
+      <div style="margin: 20px 0;">
+        <a href="locket.html" style="background-color: #000; color: #ffd700; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; border: 2px solid #ffd700; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: inline-block;">
+          🔐 Chuyển sang giao diện Locket
+        </a>
+      </div>
+    </div>
+
+  </div> 
+  
+  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3" preload="auto"></audio>
 
   <script>
-    // 1. Hàm hiện danh sách social
+    // 1. Toggle Social
     function toggleSocials() {
       const links = document.getElementById("socialLinks");
       const btn = document.getElementById("openSocialBtn");
-      
       if (links.style.display === "block") {
         links.style.display = "none";
         btn.innerHTML = "🐾 Nhấn vào đây xem in4 🌸";
       } else {
         links.style.display = "block";
-        btn.style.display = "none"; // Ẩn nút sau khi bấm (hoặc xóa dòng này nếu muốn nút vẫn hiện)
+        btn.style.display = "none";
       }
     }
 
-    // 2. Hàm xử lý NGL + Âm thanh
+    // 2. Toggle Upload Form (Hiện form tải ảnh)
+    function toggleUpload() {
+      const form = document.getElementById("uploadArea");
+      if(form.style.display === "block") {
+        form.style.display = "none";
+      } else {
+        form.style.display = "block";
+      }
+    }
+
+    // 3. Toggle Password Input
+    function showSecretInput() {
+      document.getElementById("toggleSecretBtn").style.display = "none";
+      document.getElementById("passwordArea").style.display = "block";
+    }
+
+    // 4. Check Password
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const correctPassword = "Phanducduy6."; 
+      const errorMsg = document.getElementById("error-message");
+
+      if (password === correctPassword) {
+        document.getElementById("secretLink").style.display = "block";
+        document.getElementById("passwordArea").style.display = "none";
+        errorMsg.textContent = "";
+      } else {
+        errorMsg.textContent = "Sai mật khẩu rồi nha! 😝";
+        const input = document.getElementById("passwordInput");
+        input.style.borderColor = "red";
+        setTimeout(() => input.style.borderColor = "#ffb6c1", 500);
+      }
+    }
+
+    // 5. NGL Sound
     function playNGL() {
       const sound = document.getElementById("clickSound");
       sound.volume = 0.5;
@@ -300,30 +275,6 @@
       setTimeout(() => {
         window.open("https://ngl.link/phan.duc.duy.6", "_blank");
       }, 300);
-    }
-
-    // 3. Hàm xử lý mật khẩu
-    function showSecretInput() {
-      document.getElementById("toggleSecretBtn").style.display = "none";
-      document.getElementById("password-area").style.display = "block";
-    }
-
-    function checkPassword() {
-      const password = document.getElementById("passwordInput").value;
-      const correctPassword = "Phanducduy6."; // Pass của bạn
-      const errorMsg = document.getElementById("error-message");
-
-      if (password === correctPassword) {
-        document.getElementById("secret-link").style.display = "block";
-        document.getElementById("password-area").style.display = "none";
-        errorMsg.textContent = "";
-      } else {
-        errorMsg.textContent = "Sai mật khẩu rồi nha! 😝";
-        // Hiệu ứng rung nhẹ input (tùy chọn)
-        const input = document.getElementById("passwordInput");
-        input.style.borderColor = "red";
-        setTimeout(() => input.style.borderColor = "#ffb6c1", 500);
-      }
     }
   </script>
 
@@ -341,9 +292,3 @@
 
 </body>
 </html>
-<div style="margin: 20px 0;">
-  <a href="locket.html" style="background-color: #000; color: #ffd700; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: bold; border: 2px solid #ffd700; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: inline-block;">
-    🔐 Chuyển sang giao diện Locket
-  </a>
-</div>
-
