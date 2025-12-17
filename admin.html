@@ -49,10 +49,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
     <script>
         // Mặc định có thêm trường 'img'
+                // Mặc định ban đầu sẽ hiện nút này
         let defaultLinks = [
-            { title: "Facebook", url: "https://fb.com", img: "https://cdn-icons-png.flaticon.com/512/5968/5968764.png" },
-            { title: "Locket", url: "#", img: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d3/14/f3/d314f36a-241b-6435-0158-13204a923533/AppIcon-0-0-1x_U007emarketing-0-5-0-85-220.png/1200x630wa.png" }
+            { 
+                title: "Khu vực cấm đái 🚷", 
+                url: "#", 
+                img: "https://cdn-icons-png.flaticon.com/512/1673/1673620.png" 
+            },
+            { 
+                title: "Vào đây là bị đấm", 
+                url: "https://www.facebook.com/phan.duc.duy.6", 
+                img: "https://cdn-icons-png.flaticon.com/512/1608/1608823.png" 
+            }
         ];
+
 
         let links = JSON.parse(localStorage.getItem('myBioData')) || defaultLinks;
         const listContainer = document.getElementById('link-list');
