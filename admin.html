@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Có thêm Ảnh</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; background-color: #f0f2f5; display: flex; justify-content: center; min-height: 100vh; font-family: sans-serif; }
+        .phone-container { width: 100%; max-width: 400px; background: linear-gradient(180deg, #8A84E2 0%, #6C63FF 100%); min-height: 100vh; padding-bottom: 80px; }
+        .profile-section { text-align: center; padding: 40px 20px 20px; color: white; }
+        
+        /* Style cho từng dòng link */
+        .link-item {
+            background: white;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Ảnh xem trước nhỏ xíu */
+        .thumb-preview {
+            width: 40px; height: 40px; 
+            border-radius: 8px; 
+            background: #eee; 
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .input-group { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+        .input-text { width: 95%; border: none; outline: none; border-bottom: 1px solid #eee; padding: 4px; }
+        
+        .fab-add { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); width: 50px; height: 50px; background: #0099ff; border-radius: 50%; color: white; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .save-btn { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #2ecc71; color: white; padding: 10px 30px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div class="profile-section"><h3>ADMIN PANEL</h3></div>
+        <ul id="link-list" style="padding: 0; list-style: none;"></ul>
+        <button class="fab-add" onclick="addNewLink()"><i class="fa-solid fa-plus"></i></button>
+        <button class="save-btn" onclick="saveToStorage()">LƯU LẠI</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script>
+        // Mặc định có thêm trường 'img'
+                // Mặc định ban đầu sẽ hiện nút này
+        let defaultLinks = [
+            { 
+                title: "Khu vực cấm đái 🚷", 
+                url: "#", 
+                img: "https://cdn-icons-png.flaticon.com/512/1673/1673620.png" 
+            },
+            { 
+                title: "Vào đây là bị đấm", 
+                url: "https://www.facebook.com/phan.duc.duy.6", 
+                img: "https://cdn-icons-png.flaticon.com/512/1608/1608823.png" 
+            }
+        ];
+
+
+        let links = JSON.parse(localStorage.getItem('myBioData')) || defaultLinks;
+        const listContainer = document.getElementById('link-list');
+
+        function renderLinks() {
+            listContainer.innerHTML = "";
+            links.forEach((link, index) => {
+                const li = document.createElement('li');
+                li.className = 'link-item';
+                li.innerHTML = `
+                    <i class="fa-solid fa-bars handle" style="color: #ccc; cursor: grab;"></i>
+                    
+                    <img src="${link.img || 'https://via.placeholder.com/40'}" class="thumb-preview">
+                    
+                    <div class="input-group">
+                        <input class="input-text" style="font-weight:bold" value="${link.title}" placeholder="Tên nút" oninput="updateLink(${index}, 'title', this.value)">
+                        <input class="input-text" value="${link.url}" placeholder="Link trang web" oninput="updateLink(${index}, 'url', this.value)">
+                        <input class="input-text" style="color: blue; font-size: 11px;" value="${link.img || ''}" placeholder="Dán link ảnh (.jpg/.png) vào đây" oninput="updateLink(${index}, 'img', this.value)">
+                    </div>
+
+                    <i class="fa-solid fa-trash" onclick="removeLink(${index})" style="color: #ff4757; cursor: pointer;"></i>
+                `;
+                listContainer.appendChild(li);
+            });
+        }
+
+        function addNewLink() { links.push({ title: "Mục mới", url: "", img: "" }); renderLinks(); }
+        function removeLink(index) { if(confirm('Xóa nhé?')) { links.splice(index, 1); renderLinks(); } }
+        function updateLink(index, key, value) { links[index][key] = value; }
+        
+        function saveToStorage() {
+            localStorage.setItem('myBioData', JSON.stringify(links));
+            alert("Đã lưu! Qua bên kia xem thử nhé.");
+            renderLinks(); // Vẽ lại để cập nhật ảnh xem trước
+        }
+
+        new Sortable(listContainer, { handle: '.handle', onEnd: (evt) => {
+            const item = links.splice(evt.oldIndex, 1)[0];
+            links.splice(evt.newIndex, 0, item);
+        }});
+
+        renderLinks();
+    </script>
+</body>
+</html>
