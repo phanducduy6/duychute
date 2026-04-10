@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trình Đọc File Mật Khẩu</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background-color: #f4f7f6; }
+        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; text-align: center; }
+        .controls { text-align: center; margin-bottom: 20px; }
+        input[type="file"] { padding: 10px; }
+        .btn { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-left: 10px; display: none; }
+        .btn:hover { background: #218838; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        tr:hover { background-color: #ddd; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Công cụ Đọc & Phân Cột File CSV</h2>
+    
+    <div class="controls">
+        <input type="file" id="fileInput" accept=".csv" />
+        <button class="btn" id="downloadBtn" onclick="downloadExcel()">📥 Tải về máy (Dạng Excel)</button>
+    </div>
+
+    <div id="output">
+        <p style="text-align:center; color:#777;">Vui lòng chọn file <b>.csv</b> (ví dụ: Mật khẩu.csv) để xem. Dữ liệu sẽ tự động được chia theo từng cột.</p>
+    </div>
+</div>
+
+<script>
+    // Xử lý khi người dùng chọn file
+    document.getElementById('fileInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const text = e.target.result;
+            displayCSV(text);
+            // Hiện nút Tải về sau khi đã đọc xong
+            document.getElementById('downloadBtn').style.display = 'inline-block';
+        };
+        reader.readAsText(file, 'utf-8');
+    });
+
+    // Hàm chuyển file text thành Bảng HTML
+    function displayCSV(text) {
+        const lines = text.split('\n');
+        let html = '<table>';
+
+        lines.forEach((line, index) => {
+            if(line.trim() === '') return;
+
+            // Tách các cột bằng dấu phẩy
+            const cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+
+            html += '<tr>';
+            cols.forEach(col => {
+                let cleanCol = col.replace(/(^"|"$)/g, ''); // Bỏ dấu ngoặc kép thừa
+                if(index === 0) {
+                    html += `<th>${cleanCol}</th>`; // Hàng đầu tiên làm Tiêu đề
+                } else {
+                    html += `<td>${cleanCol}</td>`; // Các hàng sau làm nội dung
+                }
+            });
+            html += '</tr>';
+        });
+
+        html += '</table>';
+        document.getElementById('output').innerHTML = html;
+    }
+
+    // Hàm tải bảng đang xem về máy dưới dạng Excel
+    function downloadExcel() {
+        const tableHTML = document.getElementById('output').innerHTML;
+        const template = `
+            <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+            <head>
+                <meta charset="UTF-8">
+                </head>
+            <body>${tableHTML}</body>
+            </html>
+        `;
+
+        const blob = new Blob([template], { type: 'application/vnd.ms-excel' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'DanhSach_MatKhau_Đã_Phân_Cột.xls';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+</script>
+
+</body>
+</html>
