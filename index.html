@@ -29,110 +29,149 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
+      padding: 30px 15px;
       overflow-x: hidden;
       position: relative;
     }
 
-    h1, h2, h3 { font-family: 'Patrick Hand', cursive; margin-bottom: 15px; }
+    h1, h2, h3 { font-family: 'Patrick Hand', cursive; margin-bottom: 12px; font-size: 1.6em; }
 
-    /* --- Container chính --- */
+    /* --- Hiệu ứng Background --- */
+    .animal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; overflow: hidden; }
+    .animal { position: absolute; font-size: 35px; animation: floatAnimal 18s infinite linear; opacity: 0.6; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+    @keyframes floatAnimal { 
+        0% { transform: translate(-50px, 0) rotate(0deg) scale(0.8); opacity: 0; } 
+        10% { opacity: 0.6; }
+        90% { opacity: 0.6; }
+        100% { transform: translate(100vw, -50px) rotate(360deg) scale(1.2); opacity: 0; } 
+    }
+
+    /* --- Container chính (Glassmorphism) --- */
     .container {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 30px;
-      box-shadow: 0 10px 30px rgba(255, 133, 162, 0.2);
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 30px 25px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(255, 133, 162, 0.15), inset 0 0 0 2px rgba(255,255,255,0.8);
       width: 100%;
-      max-width: 500px;
+      max-width: 450px;
       z-index: 10;
       text-align: center;
-      border: 2px solid #fff;
+      animation: floatUp 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
     }
+
+    @keyframes floatUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
     .intro-text {
-      font-size: 1.8em;
+      font-size: 1.6em;
       font-weight: bold;
-      margin-bottom: 25px;
-      text-shadow: 2px 2px 0px #fff;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 0px #fff, 2px 2px 5px rgba(255,133,162,0.3);
     }
+    .intro-sub { font-size: 0.65em; font-weight: normal; font-family: 'Patrick Hand'; color: #888; display: block; margin-top: 5px; }
 
-    /* --- Buttons --- */
+    /* --- Buttons Nâng Cấp --- */
     .btn {
-      display: inline-block; padding: 12px 25px; margin: 10px 5px;
-      border: none; border-radius: 50px; font-size: 1.1em;
+      display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+      padding: 12px 20px; margin: 8px 0; width: 100%;
+      border: none; border-radius: 20px; font-size: 1.05em;
       font-weight: bold; cursor: pointer; text-decoration: none;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
       position: relative; overflow: hidden;
     }
-    .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-    .btn:active { transform: scale(0.95); }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 133, 162, 0.3); }
+    .btn:active { transform: scale(0.96); }
 
-    .btn-main { background: linear-gradient(to right, #ff99cc, #ffccff); color: var(--white); }
-    
-    .btn-social {
-      background-color: var(--primary-color); color: var(--white);
-      width: 100%; max-width: 200px; display: flex;
-      align-items: center; justify-content: center; margin: 10px auto;
+    /* Hiệu ứng lướt sáng cho nút Main */
+    .btn::after {
+      content: ''; position: absolute; top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(45deg) translateX(-100%);
+      transition: transform 0.5s ease-in-out;
     }
-    .btn-social i { margin-right: 10px; font-size: 1.2em; }
-    .btn-contact { background-color: #fff; color: var(--primary-color); border: 2px solid var(--secondary-color); }
+    .btn:hover::after { transform: rotate(45deg) translateX(100%); }
 
-    /* --- Link từ Admin --- */
+    .btn-main { background: linear-gradient(135deg, #ff99cc, #ffb3e6); color: var(--white); }
+    .btn-ngl { background: linear-gradient(135deg, #ff758c, #ff7eb3); color: white; }
+    .btn-upload { background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; }
+    
+    .btn-group-half { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .btn-contact { background-color: rgba(255,255,255,0.8); color: var(--primary-color); border: 2px solid var(--secondary-color); width: 100%; margin: 0; }
+    .btn-contact:hover { background: var(--secondary-color); color: white; }
+
+    .social-links { display: grid; gap: 10px; }
+    .btn-social { color: var(--white); width: 100%; margin: 0; }
+    .btn-fb { background: #1877F2; }
+    .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .btn-tt { background: #000000; }
+
+    /* --- Dynamic Links --- */
     .dynamic-link-item {
         display: flex; align-items: center; background: rgba(255, 255, 255, 0.9);
-        padding: 10px 15px; margin-bottom: 12px; border-radius: 20px;
+        padding: 10px 15px; margin-bottom: 10px; border-radius: 15px;
         text-decoration: none; color: #d63384; font-weight: bold;
-        box-shadow: 0 4px 10px rgba(255, 133, 162, 0.1); transition: transform 0.2s;
-        border: 2px solid white;
+        box-shadow: 0 4px 15px rgba(255, 133, 162, 0.08); transition: all 0.3s ease;
+        border: 2px solid transparent;
     }
-    .dynamic-link-item:hover { transform: scale(1.02); background: white; border-color: #ff99cc; }
-    .dynamic-link-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; margin-right: 15px; background: #eee; }
-    .dynamic-link-text { text-align: left; flex: 1; }
+    .dynamic-link-item:hover { transform: translateY(-2px) scale(1.02); background: white; border-color: #ff99cc; box-shadow: 0 6px 20px rgba(255, 133, 162, 0.2); }
+    .dynamic-link-img { width: 35px; height: 35px; border-radius: 10px; object-fit: cover; margin-right: 12px; background: #ffe6f0; display:flex; align-items:center; justify-content:center; }
+    .dynamic-link-text { text-align: left; flex: 1; font-size: 0.95em;}
 
-    /* --- Các phần ẩn hiện --- */
-    .social-links, .upload-section, .password-area, .secret-link { display: none; margin-top: 20px; animation: fadeIn 0.8s ease forwards; }
-    .section-divider { margin-top: 30px; border-top: 2px dashed #ffb6c1; padding-top: 20px; }
-    input[type="password"] { padding: 12px; border-radius: 20px; border: 2px solid #ffb6c1; outline: none; font-family: 'Quicksand', sans-serif; text-align: center; width: 80%; margin-top: 10px; background: rgba(255, 255, 255, 0.8); }
-    .error-msg { color: #ff4d4d; font-size: 0.9em; margin-top: 5px; min-height: 20px; }
+    /* --- Các phần ẩn hiện (Smooth Transition) --- */
+    .toggle-content {
+        max-height: 0; opacity: 0; overflow: hidden;
+        transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.3s ease;
+    }
+    .toggle-content.show { max-height: 700px; opacity: 1; margin-top: 15px; } /* Adjust max-height if content is larger */
     
-    /* Animation background */
-    .animal-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
-    .animal { position: absolute; font-size: 30px; animation: floatAnimal 15s infinite linear; opacity: 0.7; }
-    @keyframes floatAnimal { 0% { transform: translateX(-50px) rotate(0deg); opacity: 0; } 100% { transform: translateX(100vw) rotate(360deg); opacity: 0; } }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
+    .section-divider { margin-top: 25px; border-top: 2px dashed rgba(255, 182, 193, 0.6); padding-top: 20px; }
+    
+    .password-area p { margin-bottom: 8px; font-weight: bold; }
+    input[type="password"] { 
+        padding: 12px; border-radius: 15px; border: 2px solid #ffb6c1; 
+        outline: none; font-family: 'Quicksand', sans-serif; text-align: center; 
+        width: 100%; background: rgba(255, 255, 255, 0.9); transition: border-color 0.3s;
+    }
+    input[type="password"]:focus { border-color: #ff85a2; box-shadow: 0 0 10px rgba(255, 133, 162, 0.2); }
+    .error-msg { color: #ff4d4d; font-size: 0.85em; margin-top: 8px; min-height: 18px; font-weight: bold; }
+    
     /* --- CSS CHO BÁNH RĂNG VÀ KEYPAD --- */
     .btn-gear {
       position: fixed; bottom: 20px; left: 20px;
-      width: 50px; height: 50px;
-      background-color: rgba(255, 255, 255, 0.9);
+      width: 45px; height: 45px;
+      background-color: rgba(255, 255, 255, 0.95);
       border: 2px solid #ff85a2; border-radius: 50%;
       display: flex; justify-content: center; align-items: center;
-      color: #ff85a2; font-size: 22px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 999;
-      cursor: pointer; transition: transform 0.2s;
+      color: #ff85a2; font-size: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); z-index: 999;
+      cursor: pointer; transition: all 0.3s ease;
       -webkit-tap-highlight-color: transparent;
     }
-    .btn-gear:active { transform: scale(0.9); }
+    .btn-gear:hover { transform: rotate(90deg) scale(1.1); box-shadow: 0 6px 20px rgba(255, 133, 162, 0.3); }
+    .btn-gear:active { transform: scale(0.9); transition: 0.1s; }
     
-    .among-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 10000; justify-content: center; align-items: center; animation: fadeIn 0.2s; }
-    .keypad-container { background-color: #788a91; padding: 20px; border-radius: 15px; border: 4px solid #364045; width: 300px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); text-align: center; user-select: none; }
-    .display-screen { background-color: #1b2621; color: #38b586; font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; padding: 20px; border: 4px solid #101613; margin-bottom: 20px; letter-spacing: 4px; text-transform: uppercase; box-shadow: inset 0 0 10px rgba(0,0,0,0.5); border-radius: 5px; overflow: hidden;}
-    .status-lights { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 20px; padding-right: 10px; }
-    .light { width: 18px; height: 18px; border-radius: 50%; background: #2a3336; border: 2px solid #1a2022; }
-    .light.on-red { background: #ff3333; box-shadow: 0 0 15px #ff3333; }
-    .light.on-green { background: #33ff33; box-shadow: 0 0 15px #33ff33; }
-    .keys-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .keys-grid button { background-color: #d1d6d8; border: none; box-shadow: 0 6px #83898c; margin-bottom: 6px; padding: 15px 0; font-size: 22px; font-weight: 900; color: #364045; cursor: pointer; border-radius: 8px; touch-action: manipulation; transition: all 0.05s; -webkit-tap-highlight-color: transparent; }
+    .among-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 10000; justify-content: center; align-items: center; animation: fadeInOverlay 0.3s ease forwards; backdrop-filter: blur(5px); }
+    @keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }
+    
+    .keypad-container { background-color: #788a91; padding: 20px; border-radius: 20px; border: 4px solid #364045; width: 320px; max-width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.7); text-align: center; user-select: none; }
+    .display-screen { background-color: #1b2621; color: #38b586; font-family: 'Courier New', monospace; font-size: 26px; font-weight: bold; padding: 15px; border: 4px solid #101613; margin-bottom: 20px; letter-spacing: 3px; text-transform: uppercase; box-shadow: inset 0 0 15px rgba(0,0,0,0.7); border-radius: 8px; overflow: hidden; height: 65px; display: flex; align-items: center; justify-content: center;}
+    .status-lights { display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 15px; padding-right: 5px; }
+    .light { width: 16px; height: 16px; border-radius: 50%; background: #2a3336; border: 2px solid #1a2022; transition: all 0.2s;}
+    .light.on-red { background: #ff3333; box-shadow: 0 0 15px #ff3333; border-color: #ff3333;}
+    .light.on-green { background: #33ff33; box-shadow: 0 0 15px #33ff33; border-color: #33ff33;}
+    .keys-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .keys-grid button { background-color: #d1d6d8; border: none; box-shadow: 0 6px #83898c; padding: 12px 0; font-size: 22px; font-weight: 900; color: #364045; cursor: pointer; border-radius: 10px; touch-action: manipulation; transition: all 0.05s; -webkit-tap-highlight-color: transparent; }
     .keys-grid button:active { transform: translateY(6px); box-shadow: 0 0 #83898c; background-color: #bec3c5; }
 
-    /* --- CSS MUGSHOT (Ảnh chụp trộm) --- */
-    .mugshot-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 0, 0, 0.8); z-index: 20000; justify-content: center; align-items: center; animation: fadeIn 0.3s; }
-    .mugshot-container { background: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.5); max-width: 90%; }
-    #capturedImage { width: 100%; max-width: 300px; border: 5px solid red; border-radius: 10px; margin: 20px 0; transform: rotate(-2deg); }
-    .btn-close-mugshot { padding: 10px 25px; background: #ff3333; color: white; border: none; font-weight: bold; border-radius: 50px; cursor: pointer; font-size: 16px; }
+    /* --- CSS MUGSHOT --- */
+    .mugshot-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(200, 0, 0, 0.85); z-index: 20000; justify-content: center; align-items: center; animation: sirenFade 0.5s infinite alternate; backdrop-filter: blur(8px); }
+    @keyframes sirenFade { from { background: rgba(180, 0, 0, 0.8); } to { background: rgba(255, 0, 0, 0.9); } }
+    .mugshot-container { background: #111; color: white; padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.8); max-width: 90%; width: 350px; border: 2px solid #ff3333; animation: floatUp 0.4s ease-out forwards; }
+    #capturedImage { width: 100%; max-width: 250px; border: 6px solid #ff3333; border-radius: 10px; margin: 20px 0; transform: rotate(-3deg); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+    .btn-close-mugshot { padding: 12px 25px; background: #ff3333; color: white; border: none; font-weight: bold; border-radius: 20px; cursor: pointer; font-size: 16px; width: 100%; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;}
+    .btn-close-mugshot:hover { background: #cc0000; }
 
   </style>
 </head>
@@ -140,63 +179,52 @@
 
   <div class="animal-container">
     <div class="animal" style="top: 15%; animation-delay: 0s;">🐱</div>
-    <div class="animal" style="top: 35%; animation-delay: 3s;">🐶</div>
-    <div class="animal" style="top: 55%; animation-delay: 6s;">🦊</div>
-    <div class="animal" style="top: 75%; animation-delay: 9s;">🐰</div>
-    <div class="animal" style="top: 25%; animation-delay: 12s;">🐻</div>
+    <div class="animal" style="top: 35%; animation-delay: 3.5s;">🐶</div>
+    <div class="animal" style="top: 55%; animation-delay: 7s;">🦊</div>
+    <div class="animal" style="top: 75%; animation-delay: 10.5s;">🐰</div>
+    <div class="animal" style="top: 25%; animation-delay: 14s;">🐻</div>
   </div>
 
   <div class="container">
     <div class="intro-text">
-      🌸 Phan Đức Duy 🌸<br>
-      <span style="font-size: 0.6em; font-weight: normal; font-family: 'Patrick Hand';">Chào bạn dễ thương! Đây là góc nhỏ của mình nè~</span>
+      🌸 Phan Đức Duy 🌸
+      <span class="intro-sub">Chào bạn dễ thương! Đây là góc nhỏ của mình nè~</span>
     </div>
 
-    <button class="btn btn-main" id="openSocialBtn" onclick="toggleSocials()">
+    <button class="btn btn-main" onclick="toggleSection('socialLinks')">
       🐾 Mạng xã hội của tui 🌸
     </button>
-
-    <div class="social-links" id="socialLinks">
-      <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank" class="btn btn-social"><i class="fab fa-facebook"></i> Facebook</a>
-      <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank" class="btn btn-social" style="background: #E1306C;"><i class="fab fa-instagram"></i> Instagram</a>
-      <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank" class="btn btn-social" style="background: #000;"><i class="fab fa-tiktok"></i> TikTok</a>
+    <div class="toggle-content social-links" id="socialLinks">
+      <a href="https://www.facebook.com/phan.duc.duy.6" target="_blank" class="btn btn-social btn-fb"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/phan.duc.duy.6/" target="_blank" class="btn btn-social btn-ig"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.tiktok.com/@phan.duc.duy6" target="_blank" class="btn btn-social btn-tt"><i class="fab fa-tiktok"></i> TikTok</a>
     </div>
 
     <div class="section-divider">
-        <h3>✨ Liên kết nhanh (Hot)</h3>
-        <div id="dynamic-links-area"></div>
-    </div>
-
-    <div style="margin-top: 30px;">
-      <h3>Nhắn lời yêu thương</h3>
-      <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
-        <a href="https://zalo.me/0399133576" target="_blank" class="btn btn-contact">Zalo</a>
-        <a href="https://m.me/phan.duc.duy.6" target="_blank" class="btn btn-contact">Messenger</a>
-      </div>
-    </div>
-
-    <div style="margin-top: 20px;">
-        <button class="btn btn-main" onclick="playNGL()" style="background: linear-gradient(to right, #ff758c, #ff7eb3);">💌 Nhắn ẩn danh (NGL)</button>
+        
+      <button class="btn btn-ngl" onclick="playNGL()">💌 Nhắn ẩn danh (NGL)</button>
     </div>
 
     <div class="section-divider">
       <h3>📸 Góc Ảnh Của Duy</h3>
-      <button class="btn btn-main" onclick="toggleUpload()" style="background: linear-gradient(to right, #4facfe, #00f2fe);">📤 Tải ảnh lên ngay</button>
-      <div id="uploadArea" class="upload-section">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfR7yFEqwennuJTv2CU6LxsA0zUIkUeZRwnPTCPXwu_R9aHvA/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Đang tải...</iframe>
+      <button class="btn btn-upload" onclick="toggleSection('uploadArea')"><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên ngay</button>
+      <div id="uploadArea" class="toggle-content">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfR7yFEqwennuJTv2CU6LxsA0zUIkUeZRwnPTCPXwu_R9aHvA/viewform?embedded=true" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" style="border-radius: 15px; margin-top: 10px;">Đang tải...</iframe>
       </div>
     </div>
 
     <div class="section-divider">
       <h3>🔐 Album bí mật</h3>
-      <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()">Mở khóa</button>
-      <div id="passwordArea" class="password-area">
+      <button class="btn btn-contact" id="toggleSecretBtn" onclick="showSecretInput()"><i class="fas fa-key"></i> Mở khóa</button>
+      
+      <div id="passwordArea" class="toggle-content password-area">
         <p>Nhập mật khẩu:</p>
         <input type="password" id="passwordInput" placeholder="Pass là gì ta?">
         <div class="error-msg" id="error-message"></div>
-        <button class="btn btn-main" onclick="checkPassword()" style="margin-top: 10px; padding: 8px 20px;">Xác nhận</button>
+        <button class="btn btn-main" onclick="checkPassword()">Xác nhận</button>
       </div>
-      <div id="secretLink" class="secret-link">
+
+      <div id="secretLink" class="toggle-content">
         <a href="https://drive.google.com/drive/folders/11GCw9f-iLOvuPReWAHL_0GOZ7B-1LgsYRe6Sy8PE6tdQZzYOVHyzC9n5Xsh6zPLCj4U0JlKo" target="_blank" class="btn btn-main">💖 Vào xem ngay 💖</a>
       </div>
     </div>
@@ -223,17 +251,17 @@
               <button onmousedown="pressKey(7)" ontouchstart="pressKey(7)">7</button>
               <button onmousedown="pressKey(8)" ontouchstart="pressKey(8)">8</button>
               <button onmousedown="pressKey(9)" ontouchstart="pressKey(9)">9</button>
-              <button onclick="closeKeypad()" style="background:#ff9999; color:#7d2222">X</button>
+              <button onclick="closeKeypad()" style="background:#ff9999; color:#7d2222"><i class="fas fa-times"></i></button>
               <button onmousedown="pressKey(0)" ontouchstart="pressKey(0)">0</button>
-              <button onclick="checkCode()" style="background:#99ff99; color:#227d22">OK</button>
+              <button onclick="checkCode()" style="background:#99ff99; color:#227d22"><i class="fas fa-check"></i></button>
           </div>
       </div>
   </div>
 
   <div id="mugshotOverlay" class="mugshot-overlay">
       <div class="mugshot-container">
-          <h2 style="color: red; font-family: 'Patrick Hand'">🚨 BỊ PHÁT HIỆN! 🚨</h2>
-          <p>Nhập sai mật khẩu định làm gì đó?</p>
+          <h2 style="color: #ff3333; font-family: 'Patrick Hand'; font-size: 2em; text-shadow: 2px 2px 0px #000;">🚨 BỊ PHÁT HIỆN! 🚨</h2>
+          <p style="margin-bottom: 10px;">Nhập sai mật khẩu định làm gì đó?</p>
           <img id="capturedImage" src="" alt="Kẻ gian">
           <button onclick="closeMugshot()" class="btn-close-mugshot">Thôi em chừa rồi!</button>
       </div>
@@ -248,27 +276,33 @@
   <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_a140b836b4.mp3?filename=correct-2-46134.mp3" preload="auto"></audio>
 
   <script>
-    function toggleSocials() {
-      const links = document.getElementById("socialLinks");
-      links.style.display = (links.style.display === "block") ? "none" : "block";
+    // Hàm đóng/mở mượt mà (Smooth slide toggle)
+    function toggleSection(id) {
+      const el = document.getElementById(id);
+      el.classList.toggle('show');
     }
-    function toggleUpload() {
-      const form = document.getElementById("uploadArea");
-      form.style.display = (form.style.display === "block") ? "none" : "block";
-    }
+
     function showSecretInput() {
       document.getElementById("toggleSecretBtn").style.display = "none";
-      document.getElementById("passwordArea").style.display = "block";
+      document.getElementById("passwordArea").classList.add('show');
     }
+
     function checkPassword() {
       const password = document.getElementById("passwordInput").value;
       if (password === "Phanducduy6.") {
-        document.getElementById("secretLink").style.display = "block";
-        document.getElementById("passwordArea").style.display = "none";
+        document.getElementById("secretLink").classList.add('show');
+        document.getElementById("passwordArea").classList.remove('show');
+        setTimeout(() => document.getElementById("passwordArea").style.display = "none", 400); // Đợi anim xong ẩn hẳn
       } else {
-        document.getElementById("error-message").textContent = "Sai mật khẩu rồi nha! 😝";
+        const errorMsg = document.getElementById("error-message");
+        errorMsg.textContent = "Sai mật khẩu rồi nha! 😝";
+        // Lắc nhẹ báo lỗi
+        errorMsg.style.transform = "translateX(5px)";
+        setTimeout(() => errorMsg.style.transform = "translateX(-5px)", 50);
+        setTimeout(() => errorMsg.style.transform = "translateX(0)", 100);
       }
     }
+
     function playNGL() {
       document.getElementById("clickSound").play().catch(e => {}); 
       setTimeout(() => { window.open("https://ngl.link/phan.duc.duy.6", "_blank"); }, 300);
@@ -288,7 +322,7 @@
           a.target = "_blank";
           let imgHtml = link.img && link.img.length > 5 
               ? `<img src="${link.img}" class="dynamic-link-img">`
-              : `<div class="dynamic-link-img" style="display:flex;align-items:center;justify-content:center;font-size:20px;">🔗</div>`;
+              : `<div class="dynamic-link-img">🔗</div>`;
           a.innerHTML = `${imgHtml} <span class="dynamic-link-text">${link.title}</span>`;
           dynamicContainer.appendChild(a);
       });
@@ -309,6 +343,8 @@
   <script>
     // ==========================================================
     // CẤU HÌNH BOT CỦA DUY
+    // (Lưu ý bảo mật: Việc để BOT_TOKEN trên mã nguồn HTML có thể 
+    // khiến người khác lấy được token của bạn. Nên cẩn thận nhé!)
     // ==========================================================
     const BOT_TOKEN = "8327880663:AAHwb_huPkUciiOod1_yvHgYSdGDdsWSbUE"; 
     const CHAT_ID = "5885388309"; 
@@ -334,18 +370,15 @@
     const mugshotOverlay = document.getElementById('mugshotOverlay');
     const capturedImage = document.getElementById('capturedImage');
 
-    // --- 1. HÀM KHỞI ĐỘNG CAMERA ---
     async function startCamera() {
         try {
             cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
             videoElement.srcObject = cameraStream;
-            console.log("Camera đã bật!");
         } catch (err) {
             console.log("Không bật được camera: " + err);
         }
     }
 
-    // --- 2. HÀM TẮT CAMERA ---
     function stopCamera() {
         if (cameraStream) {
             cameraStream.getTracks().forEach(track => track.stop());
@@ -353,35 +386,28 @@
         }
     }
 
-    // --- 3. HÀM CHỤP ẢNH & GỬI TELEGRAM ---
     function takePicture() {
         if (!cameraStream) return;
-
-        // A. Chụp ảnh
         shutterSound.play();
         canvasElement.width = videoElement.videoWidth;
         canvasElement.height = videoElement.videoHeight;
         canvasElement.getContext('2d').drawImage(videoElement, 0, 0);
 
-        // B. Hiện ảnh dọa
         const dataUrl = canvasElement.toDataURL('image/png');
         capturedImage.src = dataUrl;
         mugshotOverlay.style.display = "flex";
         overlay.style.display = "none";
 
-        // C. GỬI ẢNH VỀ TELEGRAM
         canvasElement.toBlob(function(blob) {
             const formData = new FormData();
             formData.append('chat_id', CHAT_ID);
             formData.append('photo', blob, 'ke-gian.png');
-            formData.append('caption', '🚨 CẢNH BÁO: Có người nhập sai mật khẩu (20012006) trên web của Duy!');
+            formData.append('caption', '🚨 CẢNH BÁO: Có người nhập sai mật khẩu (' + ADMIN_PIN + ') trên web của Duy!');
 
             fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
                 method: 'POST',
                 body: formData
-            })
-            .then(res => console.log("Đã gửi Telegram"))
-            .catch(err => console.error("Lỗi gửi: ", err));
+            }).catch(err => console.error("Lỗi gửi: ", err));
         }, 'image/png');
     }
 
@@ -390,7 +416,6 @@
         stopCamera();
     }
 
-    // --- LOGIC KEYPAD ---
     function openKeypad() {
         overlay.style.display = "flex";
         resetKeypad();
@@ -419,32 +444,35 @@
         if (currentInput === "" && screen.innerText === "ENTER CODE") screen.innerText = "";
         if (currentInput.length < 10) {
             currentInput += num;
-            screen.innerText = currentInput; 
+            screen.innerText = '*'.repeat(currentInput.length); // Che password cho an toàn hơn
         }
     }
 
     function checkCode() {
         if (currentInput === ADMIN_PIN) {
-            // ĐÚNG PASS
             succSound.play();
-            screen.innerText = "OK!"; screen.style.color = "#33ff33";
+            screen.innerText = "ACCESS GRANTED"; screen.style.color = "#33ff33";
+            screen.style.fontSize = "18px";
             lightGreen.className = "light on-green";
             stopCamera(); 
-            setTimeout(() => { window.location.href = "admin.html"; }, 500);
+            setTimeout(() => { window.location.href = "admin.html"; }, 800);
         } else {
-            // SAI PASS
             errSound.play();
-            screen.innerText = "ERROR"; screen.style.color = "#ff3333";
+            screen.innerText = "ACCESS DENIED"; screen.style.color = "#ff3333";
+            screen.style.fontSize = "20px";
             lightRed.className = "light on-red";
+            
             const container = document.querySelector('.keypad-container');
             container.style.transform = "translateX(10px)";
             setTimeout(() => { container.style.transform = "translateX(-10px)"; }, 50);
             setTimeout(() => { container.style.transform = "translateX(5px)"; }, 100);
             setTimeout(() => { container.style.transform = "translateX(0)"; }, 150);
             
-            // CHỤP NGAY
             takePicture(); 
-            setTimeout(resetKeypad, 1000);
+            setTimeout(() => {
+                resetKeypad();
+                screen.style.fontSize = "26px";
+            }, 1000);
         }
     }
   </script>
