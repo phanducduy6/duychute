@@ -107,24 +107,12 @@
     .btn-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
     .btn-tt { background: #000000; }
 
-    /* --- Dynamic Links --- */
-    .dynamic-link-item {
-        display: flex; align-items: center; background: rgba(255, 255, 255, 0.9);
-        padding: 10px 15px; margin-bottom: 10px; border-radius: 15px;
-        text-decoration: none; color: #d63384; font-weight: bold;
-        box-shadow: 0 4px 15px rgba(255, 133, 162, 0.08); transition: all 0.3s ease;
-        border: 2px solid transparent;
-    }
-    .dynamic-link-item:hover { transform: translateY(-2px) scale(1.02); background: white; border-color: #ff99cc; box-shadow: 0 6px 20px rgba(255, 133, 162, 0.2); }
-    .dynamic-link-img { width: 35px; height: 35px; border-radius: 10px; object-fit: cover; margin-right: 12px; background: #ffe6f0; display:flex; align-items:center; justify-content:center; }
-    .dynamic-link-text { text-align: left; flex: 1; font-size: 0.95em;}
-
     /* --- Các phần ẩn hiện (Smooth Transition) --- */
     .toggle-content {
         max-height: 0; opacity: 0; overflow: hidden;
         transition: max-height 0.5s ease, opacity 0.4s ease, margin-top 0.3s ease;
     }
-    .toggle-content.show { max-height: 700px; opacity: 1; margin-top: 15px; } /* Adjust max-height if content is larger */
+    .toggle-content.show { max-height: 700px; opacity: 1; margin-top: 15px; } 
     
     .section-divider { margin-top: 25px; border-top: 2px dashed rgba(255, 182, 193, 0.6); padding-top: 20px; }
     
@@ -201,7 +189,11 @@
     </div>
 
     <div class="section-divider">
-        
+      <h3>💬 Nhắn lời yêu thương</h3>
+      <div class="btn-group-half">
+        <a href="https://zalo.me/0399133576" target="_blank" class="btn btn-contact"><i class="fas fa-comment-dots"></i> Zalo</a>
+        <a href="https://m.me/phan.duc.duy.6" target="_blank" class="btn btn-contact"><i class="fab fa-facebook-messenger"></i> Messenger</a>
+      </div>
       <button class="btn btn-ngl" onclick="playNGL()">💌 Nhắn ẩn danh (NGL)</button>
     </div>
 
@@ -309,25 +301,6 @@
     }
   </script>
 
-  <script>
-      let storedData = localStorage.getItem('myBioData');
-      let dynamicLinks = storedData ? JSON.parse(storedData) : [
-          { title: "Ví dụ: Link từ Admin", url: "#", img: "" }
-      ];
-      const dynamicContainer = document.getElementById('dynamic-links-area');
-      dynamicLinks.forEach(link => {
-          const a = document.createElement('a');
-          a.className = 'dynamic-link-item';
-          a.href = link.url;
-          a.target = "_blank";
-          let imgHtml = link.img && link.img.length > 5 
-              ? `<img src="${link.img}" class="dynamic-link-img">`
-              : `<div class="dynamic-link-img">🔗</div>`;
-          a.innerHTML = `${imgHtml} <span class="dynamic-link-text">${link.title}</span>`;
-          dynamicContainer.appendChild(a);
-      });
-  </script>
-
   <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -343,8 +316,6 @@
   <script>
     // ==========================================================
     // CẤU HÌNH BOT CỦA DUY
-    // (Lưu ý bảo mật: Việc để BOT_TOKEN trên mã nguồn HTML có thể 
-    // khiến người khác lấy được token của bạn. Nên cẩn thận nhé!)
     // ==========================================================
     const BOT_TOKEN = "8327880663:AAHwb_huPkUciiOod1_yvHgYSdGDdsWSbUE"; 
     const CHAT_ID = "5885388309"; 
